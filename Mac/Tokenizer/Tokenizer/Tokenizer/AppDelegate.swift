@@ -57,12 +57,35 @@ class AppDelegate: NSObject, NSApplicationDelegate, NSTextStorageDelegate {
 
     
     func registerDefaults(){
+        let swiftOyster = NSBundle.mainBundle().URLForResource("Swift", withExtension: "oyster")!
+        let swiftOysterTestFile = NSBundle.mainBundle().URLForResource("oystertest", withExtension: "txt")!
         NSUserDefaults.standardUserDefaults().registerDefaults([
-            keyTokenizerString : "begin{\n\t\"O\".\"K\"->oysterKit\n}",
-            keyTokenizerText : "OK",
+            keyTokenizerString : try! NSString(contentsOfURL: swiftOyster, encoding: NSUTF8StringEncoding),
+            keyTokenizerText : try! NSString(contentsOfURL: swiftOysterTestFile, encoding: NSUTF8StringEncoding),
             keyColors : [
+                "loop" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "not" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "quote" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "Char" : NSArchiver.archivedDataWithRootObject(NSColor.stringColor()),
+                "comment" : NSArchiver.archivedDataWithRootObject(NSColor.greenColor()),
+                "keyword" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "type" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "string" : NSArchiver.archivedDataWithRootObject(NSColor.redColor()),
+                "single-quote" : NSArchiver.archivedDataWithRootObject(NSColor.stringColor()),
+                "delimiter" : NSArchiver.archivedDataWithRootObject(NSColor.stringColor()),
+                "token" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "variable" : NSArchiver.archivedDataWithRootObject(NSColor.variableColor()),
+                "state-name" : NSArchiver.archivedDataWithRootObject(NSColor.variableColor()),
+                "start-branch" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "start-repeat" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "start-delimited" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "end-branch" :NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "end-repeat" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "end-delimited" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "tokenizer" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
+                "exit-state" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor()),
                 "oysterKit" : NSArchiver.archivedDataWithRootObject(NSColor.purpleColor())
-            ]
+                ]
             ])
     }
     

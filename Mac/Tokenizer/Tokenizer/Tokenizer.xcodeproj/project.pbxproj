@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2373CE7F1BD39A5B00AD6BA8 /* Swift.oyster in Resources */ = {isa = PBXBuildFile; fileRef = 2373CE7E1BD39A5B00AD6BA8 /* Swift.oyster */; settings = {ASSET_TAGS = (); }; };
+		2373CE821BD39D1B00AD6BA8 /* oystertest.txt in Resources */ = {isa = PBXBuildFile; fileRef = 2373CE801BD39A7200AD6BA8 /* oystertest.txt */; };
 		42146BED1966DD4E009BA88A /* main.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42146BEC1966DD4E009BA88A /* main.swift */; };
 		42146BEF1966DD4E009BA88A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 42146BEE1966DD4E009BA88A /* AppDelegate.swift */; };
 		42146BF11966DD4E009BA88A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 42146BF01966DD4E009BA88A /* Images.xcassets */; };
@@ -41,6 +43,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2373CE7E1BD39A5B00AD6BA8 /* Swift.oyster */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = Swift.oyster; sourceTree = "<group>"; };
+		2373CE801BD39A7200AD6BA8 /* oystertest.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = oystertest.txt; sourceTree = "<group>"; };
 		42146BE71966DD4E009BA88A /* Tokenizer.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Tokenizer.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		42146BEB1966DD4E009BA88A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		42146BEC1966DD4E009BA88A /* main.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = main.swift; sourceTree = "<group>"; };
@@ -96,6 +100,8 @@
 			isa = PBXGroup;
 			children = (
 				42146BEE1966DD4E009BA88A /* AppDelegate.swift */,
+				2373CE7E1BD39A5B00AD6BA8 /* Swift.oyster */,
+				2373CE801BD39A7200AD6BA8 /* oystertest.txt */,
 				422D5E6A197CFF1900678526 /* TokenHighlighter.swift */,
 				42146BF01966DD4E009BA88A /* Images.xcassets */,
 				42146BF21966DD4E009BA88A /* MainMenu.xib */,
@@ -214,7 +220,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2373CE821BD39D1B00AD6BA8 /* oystertest.txt in Resources */,
 				42146BF11966DD4E009BA88A /* Images.xcassets in Resources */,
+				2373CE7F1BD39A5B00AD6BA8 /* Swift.oyster in Resources */,
 				42146BF41966DD4E009BA88A /* MainMenu.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

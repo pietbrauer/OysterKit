@@ -1,0 +1,22 @@
+@letters = *"-_abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+@integer = *"0123456789"
+@comment = ["//"]
+begin{
+    @comment.!*"\n"->comment
+    ["func","let","return","->"].{
+        @letters->variable
+        ^->keyword
+    }
+    ["Bool","Int","float"].{
+        @letters->variable
+        ^->type
+    }
+    <'"',{!"\""->string}>->string
+    @letters->variable
+    @integer.{
+        ".".@integer->float
+        ^->integer
+    }
+
+    !"\x04"
+}
