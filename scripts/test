@@ -1,8 +1,7 @@
 set -x
 
 pre() {
-    gem install xcpretty
-    gem install xcpretty-travis-formatter
+    bundle install --path vendor/bundle
 }
 
 test() {
