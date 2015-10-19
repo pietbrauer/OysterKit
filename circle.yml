@@ -1,0 +1,9 @@
+machine:
+  xcode:
+    version: "7.0"
+dependencies:
+  override:
+    - ./scripts/test bootstrap
+test:
+  override:
+    - ./scripts/test test
