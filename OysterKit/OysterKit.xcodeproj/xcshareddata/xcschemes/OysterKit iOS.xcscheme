@@ -14,10 +14,10 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4221035519601B11001148F5"
-               BuildableName = "OysterKit.framework"
-               BlueprintName = "OysterKit"
-               ReferencedContainer = "container:OysterKit iOS.xcodeproj">
+               BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
+               BuildableName = "OysterKit iOS.framework"
+               BlueprintName = "OysterKit iOS"
+               ReferencedContainer = "container:OysterKit.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,20 +33,20 @@
             skipped = "NO">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "4221036019601B11001148F5"
-               BuildableName = "OysterKitTests.xctest"
-               BlueprintName = "OysterKitTests"
-               ReferencedContainer = "container:OysterKit iOS.xcodeproj">
+               BlueprintIdentifier = "23E965AA1BD4C2CF007ED3D6"
+               BuildableName = "OysterKit iOSTests.xctest"
+               BlueprintName = "OysterKit iOSTests"
+               ReferencedContainer = "container:OysterKit.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4221035519601B11001148F5"
-            BuildableName = "OysterKit.framework"
-            BlueprintName = "OysterKit"
-            ReferencedContainer = "container:OysterKit iOS.xcodeproj">
+            BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
+            BuildableName = "OysterKit iOS.framework"
+            BlueprintName = "OysterKit iOS"
+            ReferencedContainer = "container:OysterKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -65,10 +65,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4221035519601B11001148F5"
-            BuildableName = "OysterKit.framework"
-            BlueprintName = "OysterKit"
-            ReferencedContainer = "container:OysterKit iOS.xcodeproj">
+            BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
+            BuildableName = "OysterKit iOS.framework"
+            BlueprintName = "OysterKit iOS"
+            ReferencedContainer = "container:OysterKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <AdditionalOptions>
@@ -83,10 +83,10 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "4221035519601B11001148F5"
-            BuildableName = "OysterKit.framework"
-            BlueprintName = "OysterKit"
-            ReferencedContainer = "container:OysterKit iOS.xcodeproj">
+            BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
+            BuildableName = "OysterKit iOS.framework"
+            BlueprintName = "OysterKit iOS"
+            ReferencedContainer = "container:OysterKit.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
    </ProfileAction>
