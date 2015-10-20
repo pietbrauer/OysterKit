@@ -119,12 +119,7 @@ class parserTests: XCTestCase {
         
         //Create a tokenizer from the generated description
         let generatedTokenizer = parser.parse(tokFileTokDef)
-        var parserErrors = ""
-        for error in parser.errors {
-            parserErrors += "\t\(error)\n"
-        }
-        
-        XCTAssert(parserErrors.characters.count == 0, "Self parsing generated an error: \(parserErrors) with \(tokFileTokDef)")
+        XCTAssert(parser.errors.count == 0)
 
         //Tokenize original serialized description with the parsed tokenizer built from my own serialized description
         let parserGeneratedTokens = generatedTokenizer.tokenize(tokFileTokDef)

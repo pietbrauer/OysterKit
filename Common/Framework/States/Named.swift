@@ -58,9 +58,6 @@ public class Named : TokenizationState {
         //Create a "new" named state with the root set as a clone of our root
         let newState = Named(name:name,root: rootState.clone())
         
-//        println(self.rootState.description)
-//        println(newState.rootState.description)
-        
         newState.endState = newState.rootState.lowLeaf()
         newState.cloneTimeEnd = endState
 

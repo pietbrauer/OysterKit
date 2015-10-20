@@ -71,9 +71,14 @@ class standardTokensTest: XCTestCase {
         )
         
         let parsingTest = "Short 10 string"
-        
-        
-        XCTAssert(tokenizer.tokenize(parsingTest) == [token("word",chars:"Short"), token("blank",chars:" "), token("integer",chars:"10"), token("blank",chars:" "), token("word",chars:"string"), ])
+        let reference = [
+            token("word", chars: "Short"),
+            token("blank", chars: " "),
+            token("integer", chars: "10"),
+            token("blank", chars: " "),
+            token("word", chars: "string")
+        ]
+        XCTAssertEqual(tokenizer.tokenize(parsingTest), reference)
     }
     
     func testWhiteSpaces(){
@@ -87,11 +92,28 @@ class standardTokensTest: XCTestCase {
         )
 
         let parsingTest = "Short\tlittle\nstring that\n tries \tto  break \n\tthings         up"
-        
-        __debugScanning = true
+
         let tokens = tokenizer.tokenize(parsingTest)
-        assertTokenListsEqual(tokens, reference: [token("word",chars:"Short"), token("whitespace",chars:"\t"), token("word",chars:"little"), token("whitespace",chars:"\n"), token("word",chars:"string"), token("whitespace",chars:" "), token("word",chars:"that"), token("whitespace",chars:"\n "), token("word",chars:"tries"), token("whitespace",chars:" \t"), token("word",chars:"to"), token("whitespace",chars:"  "), token("word",chars:"break"), token("whitespace",chars:" \n\t"), token("word",chars:"things"), token("whitespace",chars:"         "), token("word",chars:"up"), ])
-        __debugScanning = false
+        let reference = [
+            token("word", chars: "Short"),
+            token("whitespace", chars: "\t"),
+            token("word", chars: "little"),
+            token("whitespace", chars: "\n"),
+            token("word", chars: "string"),
+            token("whitespace", chars: " "),
+            token("word", chars: "that"),
+            token("whitespace", chars: "\n "),
+            token("word", chars: "tries"),
+            token("whitespace", chars: " \t"),
+            token("word", chars: "to"),
+            token("whitespace", chars: "  "),
+            token("word", chars: "break"),
+            token("whitespace", chars: " \n\t"),
+            token("word", chars: "things"),
+            token("whitespace", chars: "         "),
+            token("word", chars: "up")
+        ]
+        XCTAssertEqual(tokens, reference)
     }
     
     func testQuotedString(){
@@ -105,7 +127,31 @@ class standardTokensTest: XCTestCase {
         )
 
         let parsingTest = "A great man once said \"It is a far better thing that I do now than I have ever done\". "
+        let reference = [
+            token("word", chars:"A"),
+            token("blank", chars:" "),
+            token("word", chars:"great"),
+            token("blank", chars:" "),
+            token("word", chars:"man"),
+            token("blank", chars:" "),
+            token("word", chars:"once"),
+            token("blank", chars:" "),
+            token("word", chars:"said"),
+            token("blank", chars:" "),
+            token("double-quote", chars:"\""),
+            token("quoted-string", chars:"It is a far better thing that I do now than I have ever done"),
+            token("double-quote", chars:"\""),
+            token("punct", chars:"."),
+            token("blank", chars:" ")
+        ]
 
-        assertTokenListsEqual(tokenizer.tokenize(parsingTest), reference: [token("word",chars:"A"), token("blank",chars:" "), token("word",chars:"great"), token("blank",chars:" "), token("word",chars:"man"), token("blank",chars:" "), token("word",chars:"once"), token("blank",chars:" "), token("word",chars:"said"), token("blank",chars:" "), token("double-quote",chars:"\""), token("quoted-string",chars:"It is a far better thing that I do now than I have ever done"), token("double-quote",chars:"\""), token("punct",chars:"."), token("blank",chars:" "), ])
+        XCTAssertEqual(tokenizer.tokenize(parsingTest), reference)
     }
+}
+
+extension Token: Equatable {}
+
+public func ==(lhs: Token, rhs: Token) -> Bool {
+    return lhs.name == rhs.name &&
+        lhs.characters == rhs.characters
 }
