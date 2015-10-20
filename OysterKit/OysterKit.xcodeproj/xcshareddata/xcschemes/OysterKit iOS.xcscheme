@@ -15,7 +15,7 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
-               BuildableName = "OysterKit iOS.framework"
+               BuildableName = "OysterKit.framework"
                BlueprintName = "OysterKit iOS"
                ReferencedContainer = "container:OysterKit.xcodeproj">
             </BuildableReference>
@@ -44,7 +44,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
-            BuildableName = "OysterKit iOS.framework"
+            BuildableName = "OysterKit.framework"
             BlueprintName = "OysterKit iOS"
             ReferencedContainer = "container:OysterKit.xcodeproj">
          </BuildableReference>
@@ -66,7 +66,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
-            BuildableName = "OysterKit iOS.framework"
+            BuildableName = "OysterKit.framework"
             BlueprintName = "OysterKit iOS"
             ReferencedContainer = "container:OysterKit.xcodeproj">
          </BuildableReference>
@@ -84,7 +84,7 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "23E965A01BD4C2CF007ED3D6"
-            BuildableName = "OysterKit iOS.framework"
+            BuildableName = "OysterKit.framework"
             BlueprintName = "OysterKit iOS"
             ReferencedContainer = "container:OysterKit.xcodeproj">
          </BuildableReference>
