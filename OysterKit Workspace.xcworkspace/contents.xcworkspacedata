@@ -2,15 +2,9 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:Mac/Tokenizer/Tokenizer/Tokenizer.xcodeproj">
+      location = "group:Tokenizer/Tokenizer.xcodeproj">
    </FileRef>
    <FileRef
-      location = "group:Examples/Hello World/Hello World.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:iOS/OysterKit/OysterKit iOS.xcodeproj">
-   </FileRef>
-   <FileRef
-      location = "group:Mac/OysterKit/OysterKit Mac.xcodeproj">
+      location = "group:OysterKit/OysterKit.xcodeproj">
    </FileRef>
 </Workspace>
