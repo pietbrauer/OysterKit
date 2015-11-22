@@ -21,19 +21,14 @@ public class Keywords : TokenizationState {
     }
     
     public override func scan(operation: TokenizeOperation) {
+        let completionsText = operation.context.consumedCharacters + String(operation.current)
+        guard let _ = completions(completionsText) else { return }
+
         var didAdvance = false
-        
-        if completions(operation.context.consumedCharacters+"\(operation.current)") == nil {
-            return
-        }
-        
-        while let allCompletions = completions(operation.context.consumedCharacters+"\(operation.current)") {
-            if allCompletions.count == 1 && allCompletions[0] == operation.context.consumedCharacters {
-                //Pursue our branches
+        while let allCompletions = completions(operation.context.consumedCharacters + String(operation.current)) {
+            if allCompletions.first == operation.context.consumedCharacters {
                 emitToken(operation)
-                
                 scanBranches(operation)
-                return
             } else {
                 operation.advance()
                 didAdvance = true
@@ -42,20 +37,13 @@ public class Keywords : TokenizationState {
         
         if (didAdvance){
             scanBranches(operation)
-            return
         }
     }
         
-    func completions(string:String) -> Array<String>?{
-        var allMatches = Array<String>()
-        
-        for validString in validStrings{
-            if validString.hasPrefix(string){
-                allMatches.append(validString)
-            }
-        }
-        
-        if allMatches.count == 0{
+    func completions(string: String) -> [String]? {
+        let allMatches = validStrings.filter({ $0.hasPrefix(string) })
+
+        if allMatches.count == 0 {
             return nil
         } else {
             return allMatches
