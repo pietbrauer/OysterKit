@@ -8,14 +8,6 @@
 
 import Foundation
 
-public var __debugScanning = false
-
-func scanDebug(message:String){
-    if __debugScanning {
-        print(message)
-    }
-}
-
 public protocol EmancipatedTokenizer {
     func scan(operation:TokenizeOperation)
 }
@@ -133,12 +125,6 @@ public class TokenizeOperation : CustomStringConvertible {
         scan(self)
     }
 
-    func debug(operation:String=""){
-        if __debugScanning {
-            scanDebug("\(operation) \(self)")
-        }
-    }
-
     //
     // Moves forward in the supplied string
     //
@@ -161,8 +147,6 @@ public class TokenizeOperation : CustomStringConvertible {
 
         context.startPosition = context.currentPosition
         context.__startIndex = context.__currentIndex
-
-        debug("token()")
     }
 
 
@@ -180,9 +164,6 @@ public class TokenizeOperation : CustomStringConvertible {
         }
 
         inContext.tokens.removeAll(keepCapacity: true)
-
-        debug("publishTokens()")
-
         return true
     }
 
@@ -193,7 +174,6 @@ public class TokenizeOperation : CustomStringConvertible {
         let newContext = Context(atPosition: context.currentPosition, withMarker:context.__currentIndex, withStates: states, forString:__sourceString)
         __contextStack.append(newContext)
         context = newContext
-        debug("pushContext()")
     }
 
 
@@ -205,7 +185,6 @@ public class TokenizeOperation : CustomStringConvertible {
         }
 
         if __contextStack.count == 1 {
-            debug("popContext()")
             return
         }
 
@@ -221,8 +200,6 @@ public class TokenizeOperation : CustomStringConvertible {
         //Update the now current context with the progress achieved by the popped state
         context.currentPosition = poppedState.currentPosition
         context.__currentIndex = poppedState.__currentIndex
-
-        debug("popContext()")
     }
 }
 
@@ -233,7 +210,6 @@ extension TokenizeOperation : EmancipatedTokenizer {
 
         while scanAdvanced && !complete {
             scanAdvanced = false
-            debug("rootScan Start")
 
             //Scan through our branches
             for tokenizer in context.states {
@@ -251,8 +227,6 @@ extension TokenizeOperation : EmancipatedTokenizer {
                 context.__startIndex = context.__currentIndex
                 __publishTokens(context)
             }
-
-            debug("rootScan End")
         }
     }
 }

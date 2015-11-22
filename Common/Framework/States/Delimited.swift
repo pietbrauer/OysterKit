@@ -101,7 +101,6 @@ public class Delimited : TokenizationState{
     
     
     public override func scan(operation: TokenizeOperation) {
-        operation.debug("Entered \(openingDelimiter)Delimited\(poppingState.allowedCharacters)")
         if openingDelimiter != operation.current {
             return
         }

@@ -246,8 +246,6 @@ public class TokenizationState : CustomStringConvertible, Equatable /*StringLite
     func scanBranches(operation:TokenizeOperation){
         let startPosition = operation.context.currentPosition
         
-        operation.debug("Entered TokenizationState at \(startPosition) with \(branches.count) states")
-        
         for branch in branches {
             branch.scan(operation)
             
@@ -255,7 +253,6 @@ public class TokenizationState : CustomStringConvertible, Equatable /*StringLite
             //states are at the end that could be OK
             //Did we move forward? If so we can leave
             if operation.context.currentPosition > startPosition{
-                scanDebug("Found valid branch now at \(operation.context.currentPosition)")
                 return
             }
         }

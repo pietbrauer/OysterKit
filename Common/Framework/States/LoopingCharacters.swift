@@ -35,8 +35,6 @@ public class LoopingCharacters : Characters {
     }
     
     public override func scan(operation: TokenizeOperation){
-        operation.debug("Entered "+(inverted ? "!" : "")+"LoopingChar '\(allowedCharacters)'")
-        
         if isAllowed(operation.current) {
             //Scan through as much as we can
             repeat {

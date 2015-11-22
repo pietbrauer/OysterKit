@@ -19,8 +19,6 @@ public class Exit : TokenizationState {
     }
     
     public override func scan(operation: TokenizeOperation) {
-        operation.debug("Entered Exit")
-        
         emitToken(operation)
     }
 }

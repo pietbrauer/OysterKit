@@ -189,7 +189,6 @@ public class OKScriptParser:StackParser{
                         //Now we need to create a named state, we only specify the root state
                         //we won't know the end state for some time
                         let namedState = Named(name: stateName.characters, root:state.state)
-                        debug("Created state with charcters "+stateName.characters+" which results in a state that describes itself as "+namedState.description)
                         super.pushToken(State(state: namedState))
                         return
                     } else {
@@ -457,16 +456,7 @@ public class OKScriptParser:StackParser{
         }
     }
     
-    func debug(message:String){
-        if __okDebug {
-            print(message)
-        }
-    }
-    
     override public func parse(token: Token) -> Bool {
-        
-        debug("\n>Processing: \(token)\n")
-
         switch token.name {
         case "loop":
             loop = true
@@ -535,19 +525,10 @@ public class OKScriptParser:StackParser{
     func registerNamedState(inout stateSequence:[TokenizationState], inout endState:TokenizationState?)->Bool{
         //The last item in the list should be the named state, anything else should be a sequence
         if let namedState = stateSequence.removeLast() as? Named {
-            debug("Registering the named state, putting the state back on the stack")
-            debug("Sequence is: ")
-            for state in stateSequence {
-                debug("\t"+state.description)
-            }
             if stateSequence.count > 0 {
-                debug("Setting up sequence")
                 namedState.sequence(Array(stateSequence.reverse()))
                 namedState.endState = endState!
             }
-            
-            debug("Registering state and resetting sequence")
-            debug("\t\(namedState)")
             definedNamedStates[namedState.name] = namedState
             
             endState = nil
@@ -559,9 +540,6 @@ public class OKScriptParser:StackParser{
     }
     
     func foldUpNamedStates(){
-        
-        debug("Folding and defining named states:")
-
         var endState:TokenizationState?
         var stateSequence = [TokenizationState]()
         var concatenate = false
@@ -571,20 +549,15 @@ public class OKScriptParser:StackParser{
             debugState()
     
             if let topStateToken = popToken()! as? State {
-                debug("Top token was a state")
-                
                 if concatenate {
-                    debug("Appending to state sequence")
                     stateSequence.append(topStateToken.state)
                 } else {
                     //Is this the start of a chain?
                     if endState == nil {
-                        debug("Creating a new state sequence")
                         endState = topStateToken.state
                         stateSequence.removeAll(keepCapacity: false)
                         stateSequence.append(endState!)
                     } else {
-                        debug("Preparing to register a named state")
                         //This is actually the start of the next chain, put it back and unwind the chain
                         pushToken(topStateToken)
                         
@@ -597,7 +570,6 @@ public class OKScriptParser:StackParser{
                 
                 concatenate = false
             } else {
-                debug("Assuming it was a concatenate operator")
                 //This should be the then token
                 concatenate = true
             }

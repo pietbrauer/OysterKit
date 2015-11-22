@@ -42,10 +42,6 @@ class parserTests: XCTestCase {
             parserErrors+="\t\(error)\n"
         }
         
-        if __debugScanning {
-            print(tokenizer.description)
-        }
-        
         XCTAssert(parserErrors.characters.count == 0, "\n\nParsing of \(script) failed with errors:\n\(parserErrors) after creating \n\(tokenizer) from token stream \(OKScriptTokenizer().tokenize(script))")
         
         return tokenizer.tokenize(tokenize)

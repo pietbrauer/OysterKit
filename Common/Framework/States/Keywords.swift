@@ -21,8 +21,6 @@ public class Keywords : TokenizationState {
     }
     
     public override func scan(operation: TokenizeOperation) {
-        operation.debug("Entered Keywords \(validStrings)")
-
         var didAdvance = false
         
         if completions(operation.context.consumedCharacters+"\(operation.current)") == nil {

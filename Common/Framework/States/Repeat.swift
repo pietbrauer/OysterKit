@@ -61,9 +61,7 @@ public class Repeat : TokenizationState{
     }
     
     func fallThroughToBranches(operation:TokenizeOperation, repeats:Int){
-        operation.debug("Exiting Repeat with \(repeats) repititions, before pop")
         operation.popContext(false)
-        operation.debug("Exiting Repeat, after pop")
         
         //Did we get enough repeats?
         if repeats < minimumRepeats{
@@ -77,8 +75,6 @@ public class Repeat : TokenizationState{
     }
     
     public override func scan(operation: TokenizeOperation) {
-        operation.debug("Entered Repeat (\(minimumRepeats).."+(maximumRepeats != nil ? ", \(maximumRepeats))" : ")"))
-        
         //Create a new context to capture any tokens, we don't want to fall back though, so will pop it off
         //before returning
         operation.pushContext([])
@@ -88,18 +84,12 @@ public class Repeat : TokenizationState{
         
         repeat {
             tokensCreated = false
-            
-            operation.debug("Before repeat scan")
             repeatingState.scan(operation)
-            operation.debug("After repeat scan")
             
             if operation.context.tokens.count > 0 {
                 repeats++
                 tokensCreated = true
-                
-                operation.debug("Repeating state created token, about to clear")
                 operation.context.tokens.removeAll(keepCapacity: true)
-                operation.debug("Cleared")
         
                 //If we have hit the limit, then exit
                 if maximumRepeats != nil && repeats == maximumRepeats {
