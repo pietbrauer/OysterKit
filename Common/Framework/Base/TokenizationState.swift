@@ -45,7 +45,8 @@ public class TokenizationState : CustomStringConvertible, Equatable /*StringLite
     }
     
     init(){
-        id = "\(stateClassName())\(__anonymousStateCount++)"
+        __anonymousStateCount += 1
+        id = "\(stateClassName())\(__anonymousStateCount)"
     }
     
     //

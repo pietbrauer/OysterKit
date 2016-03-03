@@ -76,8 +76,8 @@ public class TokenizeOperation : CustomStringConvertible {
         var output = "Tokenization Operation State\n\tCurrent=\(current) Next=\(next) scanAdvanced=\(scanAdvanced) Complete=\(complete)\n"
 
         //Print the context stack
-        for var i = __contextStack.endIndex-1; i>=0; i-- {
-            output+="\t"+__contextStack[i].description+"\n"
+        for index in __contextStack.endIndex-1...0 {
+            output+="\t"+__contextStack[index].description+"\n"
         }
 
         return output
@@ -136,8 +136,8 @@ public class TokenizeOperation : CustomStringConvertible {
             current = eot
         }
 
-        context.__currentIndex++
-        context.currentPosition++
+        context.__currentIndex = context.__currentIndex.successor()
+        context.currentPosition += 1
     }
 
     public func token(token:Token){

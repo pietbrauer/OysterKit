@@ -87,7 +87,7 @@ public class Repeat : TokenizationState{
             repeatingState.scan(operation)
             
             if operation.context.tokens.count > 0 {
-                repeats++
+                repeats += 1
                 tokensCreated = true
                 operation.context.tokens.removeAll(keepCapacity: true)
         
