@@ -26,13 +26,13 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-public class OKScriptTokenizer : Tokenizer {
+open class OKScriptTokenizer : Tokenizer {
     
     public override init(){
         super.init()
         //Eventually this will be it's own file
         
-        self.branch(
+        _ = self.branch(
             Characters(from:" \t\n,"),
             Delimited(delimiter: "\"", states:
                 Repeat(state:Branch().branch(
@@ -106,13 +106,13 @@ class Operator : Token {
         super.init(name: "operator", withCharacters: characters)
     }
 
-    func applyTo(token:Token, parser:OKScriptParser)->Token?{
+    func applyTo(_ token:Token, parser:OKScriptParser)->Token?{
         return nil
     }
 }
 
 class EmitTokenOperator : Operator {
-    override func applyTo(token: Token, parser:OKScriptParser) -> Token? {
+    override func applyTo(_ token: Token, parser:OKScriptParser) -> Token? {
         //TODO: Probably an error, should report that
         if !parser.hasTokens() {
             parser.errors.append("Expected a state to assign the token to")
@@ -122,7 +122,7 @@ class EmitTokenOperator : Operator {
         let topToken = parser.popToken()!
         
         if let stateToken = topToken as? State {
-            stateToken.state.token(token.characters)
+            _ = stateToken.state.token(token.characters)
             return stateToken
         } else {
             if topToken.name == "state-name" {
@@ -150,10 +150,10 @@ class EmitTokenOperator : Operator {
 class ChainStateOperator : Operator {
 }
 
-public class OKScriptParser:StackParser{
+open class OKScriptParser:StackParser{
     var invert:Bool = false
     var loop:Bool = false
-    public var errors = [String]()
+    open var errors = [String]()
     var finishedNamedStates = false
     
     var definedNamedStates = [String:Named]()
@@ -162,7 +162,7 @@ public class OKScriptParser:StackParser{
         super.init()
     }
     
-    func invokeOperator(onToken:Token){
+    func invokeOperator(_ onToken:Token){
         if hasTokens() {
             if topToken()! is Operator {
                 let op = popToken()! as! Operator
@@ -179,11 +179,11 @@ public class OKScriptParser:StackParser{
         }
     }
     
-    override public func pushToken(symbol: Token) {
+    override open func pushToken(_ symbol: Token) {
         if let state = symbol as? State {
             if let topTokenName = topToken()?.name {
                 if topTokenName == "assign" {
-                    popToken()
+                    _ = popToken()
                     if let _ = topToken()?.name {
                         let stateName = popToken()!
                         //Now we need to create a named state, we only specify the root state
@@ -201,7 +201,7 @@ public class OKScriptParser:StackParser{
         super.pushToken(symbol)
     }
     
-    func popTo(tokenNamed:String)->Array<Token> {
+    func popTo(_ tokenNamed:String)->Array<Token> {
         var tokenArray = Array<Token>()
         
         var token = popToken()
@@ -242,7 +242,7 @@ public class OKScriptParser:StackParser{
                     }
                     let lastToken = finalArray.removeLast()
                     if let lastStateToken = lastToken as? State {
-                        stateToken.state.branch(lastStateToken.state)
+                        _ = stateToken.state.branch(lastStateToken.state)
                         op = nil
                     } else {
                         errors.append("Only states can emit tokens")
@@ -258,7 +258,7 @@ public class OKScriptParser:StackParser{
             }
         }
         
-        return Array(finalArray.reverse())
+        return Array(finalArray.reversed())
     }
     
     func endBranch(){
@@ -267,7 +267,7 @@ public class OKScriptParser:StackParser{
         
         for token in popTo("start-branch"){
             if let stateToken = token as? State {
-                branch.branch(stateToken.state)
+                _ = branch.branch(stateToken.state)
             }
         }
         
@@ -373,13 +373,13 @@ public class OKScriptParser:StackParser{
     }
     
     
-    func unescapeChar(characters:String)->String{
+    func unescapeChar(_ characters:String)->String{
         if characters.characters.count == 1 {
             return characters
         }
         
         let simpleTokenizer = Tokenizer()
-        simpleTokenizer.branch(
+        _ = simpleTokenizer.branch(
                 OKStandard.eot.token("ignore"),
                 Characters(from:"\\").branch(
                     Characters(from:"\\").token("backslash"),
@@ -398,7 +398,7 @@ public class OKScriptParser:StackParser{
         for token in simpleTokenizer.tokenize(characters){
             switch token.name {
             case "unicode":
-                let hexDigits = token.characters[token.characters.startIndex.successor().successor()..<token.characters.endIndex]
+                let hexDigits = token.characters[token.characters.index(after: token.characters.index(after: token.characters.startIndex))..<token.characters.endIndex]
                 if let intValue = Int(hexDigits) {
                     let unicodeCharacter = UnicodeScalar(intValue)
                     output += "\(unicodeCharacter)"
@@ -425,7 +425,7 @@ public class OKScriptParser:StackParser{
         return output
     }
     
-    func unescapeDelimiter(character:String)->String{
+    func unescapeDelimiter(_ character:String)->String{
         if character == "\\'" {
             return "'"
         } else if character == "\\\\" {
@@ -434,7 +434,7 @@ public class OKScriptParser:StackParser{
         return character
     }
     
-    func createCharState(characters:String, inverted:Bool, looped:Bool)->State{
+    func createCharState(_ characters:String, inverted:Bool, looped:Bool)->State{
         var state : TokenizationState
         
         if inverted {
@@ -456,7 +456,7 @@ public class OKScriptParser:StackParser{
         }
     }
     
-    override public func parse(token: Token) -> Bool {
+    override open func parse(_ token: Token) -> Bool {
         switch token.name {
         case "loop":
             loop = true
@@ -507,7 +507,7 @@ public class OKScriptParser:StackParser{
         return true
     }
 
-    func parseState(string:String) ->TokenizationState {
+    func parseState(_ string:String) ->TokenizationState {
         OKScriptTokenizer().tokenize(string,newToken:parse)
         
         _ = Tokenizer()
@@ -522,11 +522,11 @@ public class OKScriptParser:StackParser{
         }
     }
     
-    func registerNamedState(inout stateSequence:[TokenizationState], inout endState:TokenizationState?)->Bool{
+    func registerNamedState(_ stateSequence:inout [TokenizationState], endState:inout TokenizationState?)->Bool{
         //The last item in the list should be the named state, anything else should be a sequence
         if let namedState = stateSequence.removeLast() as? Named {
             if stateSequence.count > 0 {
-                namedState.sequence(Array(stateSequence.reverse()))
+                namedState.sequence(Array(stateSequence.reversed()))
                 namedState.endState = endState!
             }
             definedNamedStates[namedState.name] = namedState
@@ -555,7 +555,7 @@ public class OKScriptParser:StackParser{
                     //Is this the start of a chain?
                     if endState == nil {
                         endState = topStateToken.state
-                        stateSequence.removeAll(keepCapacity: false)
+                        stateSequence.removeAll(keepingCapacity: false)
                         stateSequence.append(endState!)
                     } else {
                         //This is actually the start of the next chain, put it back and unwind the chain
@@ -576,19 +576,19 @@ public class OKScriptParser:StackParser{
         }
         
         if stateSequence.count > 0 {
-            registerNamedState(&stateSequence, endState: &endState)
+            _ = registerNamedState(&stateSequence, endState: &endState)
         }
         
         debugState()        
     }
     
-    public func parse(string: String) -> Tokenizer {
+    open func parse(_ string: String) -> Tokenizer {
         let tokenizer = Tokenizer()
         
-        tokenizer.branch(parseState(string))
+        _ = tokenizer.branch(parseState(string))
         tokenizer.namedStates = definedNamedStates
         
-        tokenizer.flatten()
+        _ = tokenizer.flatten()
         
         return tokenizer
     }

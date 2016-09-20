@@ -26,7 +26,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-public class Repeat : TokenizationState{
+open class Repeat : TokenizationState{
     var minimumRepeats = 1
     var maximumRepeats : Int?
     var repeatingState:TokenizationState
@@ -60,7 +60,7 @@ public class Repeat : TokenizationState{
         }
     }
     
-    func fallThroughToBranches(operation:TokenizeOperation, repeats:Int){
+    func fallThroughToBranches(_ operation:TokenizeOperation, repeats:Int){
         operation.popContext(false)
         
         //Did we get enough repeats?
@@ -74,7 +74,7 @@ public class Repeat : TokenizationState{
         scanBranches(operation)
     }
     
-    public override func scan(operation: TokenizeOperation) {
+    open override func scan(_ operation: TokenizeOperation) {
         //Create a new context to capture any tokens, we don't want to fall back though, so will pop it off
         //before returning
         operation.pushContext([])
@@ -89,7 +89,7 @@ public class Repeat : TokenizationState{
             if operation.context.tokens.count > 0 {
                 repeats += 1
                 tokensCreated = true
-                operation.context.tokens.removeAll(keepCapacity: true)
+                operation.context.tokens.removeAll(keepingCapacity: true)
         
                 //If we have hit the limit, then exit
                 if maximumRepeats != nil && repeats == maximumRepeats {
@@ -103,7 +103,7 @@ public class Repeat : TokenizationState{
         fallThroughToBranches(operation, repeats: repeats)
     }
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
 
         var output = ""
 
@@ -121,7 +121,7 @@ public class Repeat : TokenizationState{
         return output+serializeBranches(indentation+"\t")
     }
         
-    override public func clone()->TokenizationState {
+    override open func clone()->TokenizationState {
         let newState = Repeat(state: repeatingState.clone(), min: minimumRepeats, max: maximumRepeats)
         newState.__copyProperities(self)
 

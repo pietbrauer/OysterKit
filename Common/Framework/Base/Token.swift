@@ -27,11 +27,11 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-public class Token : CustomStringConvertible{
-    public let name:String
-    public var characters:String = ""
-    public var originalStringIndex:Int?
-    public var originalStringLine:Int?
+open class Token : CustomStringConvertible{
+    open let name:String
+    open var characters:String = ""
+    open var originalStringIndex:Int?
+    open var originalStringLine:Int?
     
     init(name:String){
         self.name = name
@@ -49,7 +49,7 @@ public class Token : CustomStringConvertible{
     }
     
     
-    public var description : String {
+    open var description : String {
         if (originalStringIndex != nil) {
             return "\(name) '\(characters)' at \(originalStringIndex)"
         } else {
@@ -57,19 +57,19 @@ public class Token : CustomStringConvertible{
         }
     }
     
-    public class func createToken(state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
+    open class func createToken(_ state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
         let token = Token(name:"Token",withCharacters:capturedCharacters)
         token.originalStringIndex = startIndex
         return token
     }
     
-    public class EndOfTransmissionToken : Token {
+    open class EndOfTransmissionToken : Token {
         init(){
             super.init(name: "End of Transmission",withCharacters: "")
         }
     }
     
-    public class ErrorToken: Token{
+    open class ErrorToken: Token{
         let problem : String
         
         init(forString:String, problemDescription:String){
@@ -82,7 +82,7 @@ public class Token : CustomStringConvertible{
             super.init(name: "Error", withCharacters: "\(forCharacter)")
         }
         
-        public override var description:String {
+        open override var description:String {
             return super.description+" - "+problem
         }
     }
@@ -95,7 +95,7 @@ class WhiteSpaceToken : Token{
         originalStringIndex = startingAt
     }
     
-    override class func createToken(state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
+    override class func createToken(_ state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
         return WhiteSpaceToken(characters:capturedCharacters, startingAt: startIndex)
     }
     
@@ -121,7 +121,7 @@ class NumberToken : Token{
         if let intValue = Int(usingString) {
             self.init(value:intValue,characters: usingString)
         } else {
-            let string:NSString = usingString
+            let string:NSString = usingString as NSString
             self.init(value: string.doubleValue,characters:usingString)
         }
     }
@@ -132,13 +132,13 @@ class NumberToken : Token{
             if let intValue = Int(usingToken.characters) {
                 self.init(value:intValue,characters:usingToken.characters)
             } else {
-                self.init(value:Double.NaN,characters:usingToken.characters)
+                self.init(value:Double.nan,characters:usingToken.characters)
             }
         case "float":
-            let string : NSString = usingToken.characters
+            let string : NSString = usingToken.characters as NSString
             self.init(value: string.doubleValue, characters: usingToken.characters)
         default:
-            self.init(value:Double.NaN,characters:usingToken.characters)
+            self.init(value:Double.nan,characters:usingToken.characters)
         }
     }
     
@@ -146,7 +146,7 @@ class NumberToken : Token{
     return "number = \(numericValue)"
     }
     
-    override class func createToken(state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
+    override class func createToken(_ state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
         let token = NumberToken(usingString:capturedCharacters)
         token.originalStringIndex = startIndex
         return token
@@ -171,7 +171,7 @@ class OperatorToken : Token{
         super.init(name: "operator", withCharacters: characters)
     }
     
-    func applyTo(left:NumberToken,right:NumberToken)->NumberToken{
+    func applyTo(_ left:NumberToken,right:NumberToken)->NumberToken{
         switch characters{
         case "+":
             return NumberToken(value: left.numericValue+right.numericValue, characters: left.characters+characters+right.characters)
@@ -182,11 +182,11 @@ class OperatorToken : Token{
         case "/":
             return NumberToken(value: left.numericValue/right.numericValue, characters: left.characters+characters+right.characters)
         default:
-            return NumberToken(value: Double.NaN, characters: left.characters+characters+right.characters)
+            return NumberToken(value: Double.nan, characters: left.characters+characters+right.characters)
         }
     }
     
-    override class func createToken(state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
+    override class func createToken(_ state:TokenizationState,capturedCharacters:String,startIndex:Int)->Token{
         let token = OperatorToken(characters:capturedCharacters)
         token.originalStringIndex = startIndex
         return token

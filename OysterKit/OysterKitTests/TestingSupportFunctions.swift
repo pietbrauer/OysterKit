@@ -27,7 +27,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import OysterKit
 import XCTest
 
-func token(name:String,chars:String?=nil)->Token{
+func token(_ name:String,chars:String?=nil)->Token{
     var actualChars:String
     
     if (chars != nil){
@@ -39,11 +39,11 @@ func token(name:String,chars:String?=nil)->Token{
     return Token(name: name, withCharacters: actualChars)
 }
 
-func char(chars:String)->TokenizationState{
+func char(_ chars:String)->TokenizationState{
     return Characters(from:chars)
 }
 
-func printAsTest(tokenizer:Tokenizer, string:String, variableName:String){
+func printAsTest(_ tokenizer:Tokenizer, string:String, variableName:String){
     //tokenizer.tokenize("xyxz") == [token("xy"),token("xz")])
     
     print("\nXCTAssert(tokenizer.tokenize(\(variableName)) == [")
@@ -54,7 +54,7 @@ func printAsTest(tokenizer:Tokenizer, string:String, variableName:String){
     print("])")
 }
 
-func dump(izer:Tokenizer,with:String){
+func dump(_ izer:Tokenizer,with:String){
     print("\nTokenizing "+with)
     izer.tokenize(with){(token:Token)->Bool in
         print("\t"+token.description)
@@ -65,13 +65,13 @@ func dump(izer:Tokenizer,with:String){
 
 extension XCTestCase {
     
-    func readBundleFile(fileName:String, ext:String)->String?{
-        let bundle = NSBundle(identifier:"com.rwe-uk.OysterKitTests")
+    func readBundleFile(_ fileName:String, ext:String)->String?{
+        let bundle = Bundle(identifier:"com.rwe-uk.OysterKitTests")
         
-        if let url = bundle?.URLForResource(fileName, withExtension: ext) {
-            return try! String(contentsOfURL: url)
+        if let url = bundle?.url(forResource: fileName, withExtension: ext) {
+            return try! String(contentsOf: url)
         } else {
-           let allFiles =  bundle?.URLsForResourcesWithExtension(nil, subdirectory: nil)
+           let allFiles =  bundle?.urls(forResourcesWithExtension: nil, subdirectory: nil)
             
             XCTAssert(false, "Could not find \(fileName).\(ext) in bundle, available files are \(allFiles)")
         }
@@ -79,7 +79,7 @@ extension XCTestCase {
         return nil
     }
     
-    func assertTokenListsEqual(underTest:[Token],reference:[Token],comparePositions:Bool=false){
+    func assertTokenListsEqual(_ underTest:[Token],reference:[Token],comparePositions:Bool=false){
 
         let stopAt = underTest.count < reference.count ? underTest.count : reference.count
         

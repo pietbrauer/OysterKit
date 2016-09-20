@@ -9,11 +9,11 @@
 import Foundation
 
 public protocol EmancipatedTokenizer {
-    func scan(operation:TokenizeOperation)
+    func scan(_ operation:TokenizeOperation)
 }
 
-public class TokenizeOperation : CustomStringConvertible {
-    public class Context : CustomStringConvertible {
+open class TokenizeOperation : CustomStringConvertible {
+    open class Context : CustomStringConvertible {
         var tokens = [Token]()
         var consumedCharacters : String {
             let substring = __sourceString[__startIndex..<__currentIndex]
@@ -22,15 +22,15 @@ public class TokenizeOperation : CustomStringConvertible {
         }
 
         let states : [TokenizationState]
-        private let __sourceString : String
+        fileprivate let __sourceString : String
 
-        private var __startIndex : String.Index
-        private var __currentIndex : String.Index
+        fileprivate var __startIndex : String.Index
+        fileprivate var __currentIndex : String.Index
 
         var startPosition : Int
         var currentPosition : Int
 
-        private init(atPosition:Int, withMarker:String.Index, withStates:[TokenizationState], forString:String){
+        fileprivate init(atPosition:Int, withMarker:String.Index, withStates:[TokenizationState], forString:String){
             __startIndex = withMarker
             __currentIndex = __startIndex
             __sourceString = forString
@@ -45,7 +45,7 @@ public class TokenizeOperation : CustomStringConvertible {
             startPosition = currentPosition
         }
 
-        public var description : String {
+        open var description : String {
             return "Started at: \(startPosition), now at: \(currentPosition), having consumed \(consumedCharacters) and holding \(tokens)"
         }
     }
@@ -56,23 +56,23 @@ public class TokenizeOperation : CustomStringConvertible {
 
     var  scanAdvanced = false
 
-    private var  __tokenHandler : (Token)->Bool
-    private let  __startingStates : [TokenizationState]
+    fileprivate var  __tokenHandler : (Token)->Bool
+    fileprivate let  __startingStates : [TokenizationState]
     let  eot : Character = "\u{04}"
-    private var  __marker : IndexingGenerator<String.CharacterView> {
+    fileprivate var  __marker : IndexingIterator<String.CharacterView> {
         didSet{
             scanAdvanced = true
         }
     }
-    private var  __contextStack = [Context]()
-    private var  __sourceString : String
+    fileprivate var  __contextStack = [Context]()
+    fileprivate var  __sourceString : String
 
     var  context : Context
     var  complete : Bool {
         return current == eot
     }
 
-    public var description : String {
+    open var description : String {
         var output = "Tokenization Operation State\n\tCurrent=\(current) Next=\(next) scanAdvanced=\(scanAdvanced) Complete=\(complete)\n"
 
         //Print the context stack
@@ -86,7 +86,7 @@ public class TokenizeOperation : CustomStringConvertible {
     //For now, to help with compatibility
     init(legacyTokenizer:Tokenizer){
         __sourceString = "\u{0004}"
-        __marker = __sourceString.characters.generate()
+        __marker = __sourceString.characters.makeIterator()
         current = __marker.next()!
         next = __marker.next()
 
@@ -103,15 +103,15 @@ public class TokenizeOperation : CustomStringConvertible {
     // The primary entry point for the class, the token receiver will be called
     // whenever a token is published
     //
-    public func tokenize(string:String, tokenReceiver : (Token)->(Bool)){
+    open func tokenize(_ string:String, tokenReceiver : @escaping (Token)->(Bool)){
         __tokenHandler = tokenReceiver
 
         //Prepare string
         __sourceString = string
-        __marker = __sourceString.characters.generate()
+        __marker = __sourceString.characters.makeIterator()
 
         //Prepare stack and context
-        __contextStack.removeAll(keepCapacity: true)
+        __contextStack.removeAll(keepingCapacity: true)
         __contextStack.append(Context(atPosition: 0, withMarker:__sourceString.startIndex, withStates: __startingStates, forString:__sourceString))
         context = __contextStack[0]
 
@@ -128,7 +128,7 @@ public class TokenizeOperation : CustomStringConvertible {
     //
     // Moves forward in the supplied string
     //
-    public func advance(){
+    open func advance(){
         if next != nil {
             current = next!
             next = __marker.next()
@@ -136,11 +136,11 @@ public class TokenizeOperation : CustomStringConvertible {
             current = eot
         }
 
-        context.__currentIndex = context.__currentIndex.successor()
+        context.__currentIndex = context.consumedCharacters.index(after: context.__currentIndex)
         context.currentPosition += 1
     }
 
-    public func token(token:Token){
+    open func token(_ token:Token){
         if !(token is Token.EndOfTransmissionToken) {
             context.tokens.append(token)
         }
@@ -150,7 +150,7 @@ public class TokenizeOperation : CustomStringConvertible {
     }
 
 
-    private func __publishTokens(inContext:Context)->Bool{
+    fileprivate func __publishTokens(_ inContext:Context)->Bool{
         //Do we need to do this at all?
         if inContext.tokens.count == 0 {
             return true
@@ -158,18 +158,18 @@ public class TokenizeOperation : CustomStringConvertible {
 
         for token in inContext.tokens {
             if !__tokenHandler(token){
-                inContext.tokens.removeAll(keepCapacity: true)
+                inContext.tokens.removeAll(keepingCapacity: true)
                 return false
             }
         }
 
-        inContext.tokens.removeAll(keepCapacity: true)
+        inContext.tokens.removeAll(keepingCapacity: true)
         return true
     }
 
-    public func pushContext(states:[TokenizationState]){
+    open func pushContext(_ states:[TokenizationState]){
         //Publish any tokens before moving into the new state
-        __publishTokens(context)
+        _ = __publishTokens(context)
 
         let newContext = Context(atPosition: context.currentPosition, withMarker:context.__currentIndex, withStates: states, forString:__sourceString)
         __contextStack.append(newContext)
@@ -177,11 +177,11 @@ public class TokenizeOperation : CustomStringConvertible {
     }
 
 
-    public func popContext(publishTokens:Bool=true){
+    open func popContext(_ publishTokens:Bool=true){
         let publishedTokens = publishTokens && context.tokens.count > 0
 
         if publishTokens {
-            __publishTokens(context)
+            _ = __publishTokens(context)
         }
 
         if __contextStack.count == 1 {
@@ -204,7 +204,7 @@ public class TokenizeOperation : CustomStringConvertible {
 }
 
 extension TokenizeOperation : EmancipatedTokenizer {
-    public func scan(operation:TokenizeOperation) {
+    public func scan(_ operation:TokenizeOperation) {
 
         scanAdvanced = true
 
@@ -225,7 +225,7 @@ extension TokenizeOperation : EmancipatedTokenizer {
             if __contextStack.count == 1 {
                 context.startPosition = context.currentPosition
                 context.__startIndex = context.__currentIndex
-                __publishTokens(context)
+                _ = __publishTokens(context)
             }
         }
     }

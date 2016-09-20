@@ -29,22 +29,22 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 
 protocol Parser{
-    func parse(token:Token)->Bool
-    func parseString(string:String, withTokenizer:Tokenizer)
+    func parse(_ token:Token)->Bool
+    func parseString(_ string:String, withTokenizer:Tokenizer)
 }
 
-public class StackParser:Parser{
+open class StackParser:Parser{
     var symbolStack = Array<Token>()
     
     public init(){
         
     }
     
-    public func pushToken(symbol: Token) {
+    open func pushToken(_ symbol: Token) {
         symbolStack.append(symbol)
     }
     
-    public func topToken() -> Token? {
+    open func topToken() -> Token? {
         if !hasTokens(){
             return nil
         }
@@ -52,7 +52,7 @@ public class StackParser:Parser{
         return symbolStack[symbolStack.endIndex-1]
     }
     
-    public func popToken() -> Token? {
+    open func popToken() -> Token? {
         if !hasTokens(){
             return nil
         }
@@ -60,20 +60,20 @@ public class StackParser:Parser{
         return symbolStack.removeLast()
     }
     
-    public func hasTokens() -> Bool {
+    open func hasTokens() -> Bool {
         return symbolStack.count != 0
     }
     
-    public func tokens() -> Array<Token> {
+    open func tokens() -> Array<Token> {
         return symbolStack
     }
     
-    public func parse(token: Token) -> Bool {
+    open func parse(_ token: Token) -> Bool {
         pushToken(token)
         return true
     }
     
-    public func parseString(string: String, withTokenizer: Tokenizer) {
+    open func parseString(_ string: String, withTokenizer: Tokenizer) {
         withTokenizer.tokenize(string,newToken:parse)
     }
 }

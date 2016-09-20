@@ -27,7 +27,7 @@ class cloneTests: XCTestCase {
         ct = Tokenizer()
     }
     
-    func tokenizersProduceSameOutput(startState:TokenizationState, testString:String = "AABBBAABA"){
+    func tokenizersProduceSameOutput(_ startState:TokenizationState, testString:String = "AABBBAABA"){
         ot.branch(startState)
         ct.branch(startState.clone())
         
@@ -50,14 +50,14 @@ class cloneTests: XCTestCase {
     
     func testCloneRepeatAndChar() {
         tokenizersProduceSameOutput(
-            Repeat(state:aToken.clone()).token("A's")
+            Repeated(state:aToken.clone()).token("A's")
         )
     }
 
     
     func testCloneRepeatBranchWithChar() {
         tokenizersProduceSameOutput(
-            Repeat(state:Branch().branch(aToken.clone(),bToken.clone())).token("A's and B's")
+            Repeated(state:Branch().branch(aToken.clone(),bToken.clone())).token("A's and B's")
         )
     }
 
@@ -69,10 +69,10 @@ class cloneTests: XCTestCase {
     }
     
     func testChainedRepeatClone() {
-        let repeatB = Repeat(state: bToken.clone())
-        let repeatAB = Repeat(state: aToken.clone()).branch(repeatB).token("AB")
+        let repeatB = Repeated(state: bToken.clone())
+        let repeatAB = Repeated(state: aToken.clone()).branch(repeatB).token("AB")
 
-        tokenizersProduceSameOutput(Repeat(state:repeatAB).token("AB's"))
+        tokenizersProduceSameOutput(Repeated(state:repeatAB).token("AB's"))
     }
     
     func testDelimitedClone() {

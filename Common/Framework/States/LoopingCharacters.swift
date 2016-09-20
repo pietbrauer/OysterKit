@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class LoopingCharacters : Characters {
+open class LoopingCharacters : Characters {
     
     public override init(except: String) {
         super.init(except: except)
@@ -26,7 +26,7 @@ public class LoopingCharacters : Characters {
         return "*"+super.annotations()
     }
 
-    override public func clone() -> TokenizationState {
+    override open func clone() -> TokenizationState {
         let newState = LoopingCharacters(from: "\(allowedCharacters)")
         
         newState.__copyProperities(self)
@@ -34,7 +34,7 @@ public class LoopingCharacters : Characters {
         return newState
     }
     
-    public override func scan(operation: TokenizeOperation){
+    open override func scan(_ operation: TokenizeOperation){
         if isAllowed(operation.current) {
             //Scan through as much as we can
             repeat {

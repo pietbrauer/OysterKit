@@ -37,9 +37,9 @@ class tokenizerTests: XCTestCase {
         let escapedAnchors = Characters(from:"\\").branch(
             Characters(from:escapedControlCodes+escapedAnchorCharacters+escapedRegexSyntax+escapedCharacterClasses).token("character"),
             Characters(from:"x").branch(
-                Repeat(state: OKStandard.hexDigit, min:2,max:2).token("character"),
+                Repeated(state: OKStandard.hexDigit, min:2,max:2).token("character"),
                 Characters(from: "{").sequence(
-                    Repeat(state: OKStandard.hexDigit, min: 4, max: 4),
+                    Repeated(state: OKStandard.hexDigit, min: 4, max: 4),
                     Characters(from: "}").token("character")
                 )
             )
@@ -130,7 +130,7 @@ class tokenizerTests: XCTestCase {
             return
         }
         
-        self.measureBlock() {
+        self.measure() {
             let generatedTokenizer = OKStandard.parseTokenizer(tokFileTokDef!)
             _ = generatedTokenizer?.tokenize(tokFileTokDef!)
         }
@@ -147,7 +147,7 @@ class tokenizerTests: XCTestCase {
             tokFileTokDef += tokFileTokDef
             tokFileTokDef += tokFileTokDef
             
-            self.measureBlock() {
+            self.measure() {
                 OKScriptTokenizer().tokenize(tokFileTokDef)
             }
         }

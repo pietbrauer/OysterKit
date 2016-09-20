@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Keywords : TokenizationState {
+open class Keywords : TokenizationState {
     override func stateClassName()->String {
         return "Keywords"
     }
@@ -20,7 +20,7 @@ public class Keywords : TokenizationState {
         super.init()
     }
     
-    public override func scan(operation: TokenizeOperation) {
+    open override func scan(_ operation: TokenizeOperation) {
         let completionsText = operation.context.consumedCharacters + String(operation.current)
         guard let _ = completions(completionsText) else { return }
 
@@ -40,7 +40,7 @@ public class Keywords : TokenizationState {
         }
     }
         
-    func completions(string: String) -> [String]? {
+    func completions(_ string: String) -> [String]? {
         let allMatches = validStrings.filter({ $0.hasPrefix(string) })
 
         if allMatches.count == 0 {
@@ -51,7 +51,7 @@ public class Keywords : TokenizationState {
     }
     
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
         
         var output = ""
         
@@ -72,7 +72,7 @@ public class Keywords : TokenizationState {
         return output+serializeBranches(indentation+"\t")
     }
     
-    override public func clone() -> TokenizationState {
+    override open func clone() -> TokenizationState {
         let newState = Keywords(validStrings: validStrings)
         
         newState.__copyProperities(self)

@@ -15,7 +15,7 @@ class stateTestRepeat: XCTestCase {
     func testRepeat2HexDigits(){
         //Test for 2
         tokenizer.branch(
-            Repeat(state:OKStandard.hexDigit, min:2,max:2).token("xx"),
+            Repeated(state:OKStandard.hexDigit, min:2,max:2).token("xx"),
             OKStandard.eot
         )
                 
@@ -26,7 +26,7 @@ class stateTestRepeat: XCTestCase {
 
     func testRepeat4HexDigits(){
         tokenizer.branch(
-            Repeat(state:OKStandard.hexDigit, min:4,max:4).token("xx"),
+            Repeated(state:OKStandard.hexDigit, min:4,max:4).token("xx"),
             OKStandard.eot
         )
         
@@ -35,14 +35,14 @@ class stateTestRepeat: XCTestCase {
 
     func testRepeatXYFixed1() {
         let x = char("x").sequence(char("y").token("xy"))
-        tokenizer.branch(Repeat(state: x, min: 3, max: 3).token("xyxyxy"))
+        tokenizer.branch(Repeated(state: x, min: 3, max: 3).token("xyxyxy"))
         XCTAssert(tokenizer.tokenize("xyxyxy") == [token("xyxyxy")])
     }
 
     func testRepeatXYFixed2(){
         let branch = Branch().branch(sequence(char("x"),char("y").token("xy")))
         tokenizer.branch(
-            Repeat(state:branch,min:3,max:3).token("xyxyxy"),
+            Repeated(state:branch,min:3,max:3).token("xyxyxy"),
             OKStandard.eot
         )
         

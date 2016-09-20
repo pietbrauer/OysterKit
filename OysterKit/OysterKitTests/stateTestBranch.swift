@@ -23,7 +23,7 @@ class stateTestBranch: XCTestCase {
 
         let lettersWithLoop = LoopingCharacters(from:"abcdef").token("easy")
         let state = Characters(from:"abcdef").token("ignore")
-        let lettersWithRepeat = Repeat(state: state).token("easy")
+        let lettersWithRepeat = Repeated(state: state).token("easy")
 
         let space = Characters(from: " ")
         let bracketedWithRepeat = Delimited(open: "(", close: ")", states: lettersWithRepeat).token("bracket")

@@ -30,7 +30,7 @@ import Foundation
 //
 //Completely stateless
 //
-public class Characters : TokenizationState{
+open class Characters : TokenizationState{
     var allowedCharacters : String
     var inverted = false
     
@@ -54,7 +54,7 @@ public class Characters : TokenizationState{
         super.init()
     }
     
-    func isAllowed(character:Character)->Bool{
+    func isAllowed(_ character:Character)->Bool{
         for allowedCharacter in allowedCharacters.characters{
             if allowedCharacter == character {
                 return !inverted
@@ -69,7 +69,7 @@ public class Characters : TokenizationState{
         return inverted ? "!" : ""
     }
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
         
         var output = annotations()
         
@@ -101,7 +101,7 @@ public class Characters : TokenizationState{
     }
 
     
-    override public func clone()->TokenizationState {
+    override open func clone()->TokenizationState {
         var newState : TokenizationState
         
         if inverted {
@@ -114,7 +114,7 @@ public class Characters : TokenizationState{
         return newState
     }
     
-    public override func scan(operation: TokenizeOperation) {
+    open override func scan(_ operation: TokenizeOperation) {
         if isAllowed(operation.current) {
             //Move scanning forward
             operation.advance()

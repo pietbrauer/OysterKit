@@ -24,7 +24,7 @@ class parserTests: XCTestCase {
         super.tearDown()
     }
     
-    func niceParserErrors(theParser:OKScriptParser)->String{
+    func niceParserErrors(_ theParser:OKScriptParser)->String{
         var parserErrors = ""
         
         for error in theParser.errors {
@@ -34,7 +34,7 @@ class parserTests: XCTestCase {
         return parserErrors
     }
     
-    func parserTest(script: String, thenTokenizing tokenize: String) -> [Token] {
+    func parserTest(_ script: String, thenTokenizing tokenize: String) -> [Token] {
         let tokenizer = parser.parse(script)
         
         var parserErrors = ""

@@ -28,7 +28,7 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 import Foundation
 
 
-public class Branch : TokenizationState {
+open class Branch : TokenizationState {
     var transientTransitionState:Branch?
     
     override func stateClassName()->String {
@@ -56,7 +56,7 @@ public class Branch : TokenizationState {
     //
     // Serialization
     //
-    override func serialize(indentation:String)->String{
+    override func serialize(_ indentation:String)->String{
         var output = "{"+serializeStateArray(indentation+"\t",states: branches)+"}"
         
         if branches.count > 1 {
@@ -66,12 +66,12 @@ public class Branch : TokenizationState {
         return output
     }
     
-    public override var description:String {
+    open override var description:String {
         return serialize("")
     }
     
     
-    override public func clone()->TokenizationState {
+    override open func clone()->TokenizationState {
         let newState = Branch()
         newState.__copyProperities(self)
         return newState

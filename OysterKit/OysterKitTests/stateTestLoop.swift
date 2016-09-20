@@ -21,7 +21,7 @@ class stateTestLoop: XCTestCase {
                             )
         tokenizer.branch(
             Delimited(delimiter: "\"", states:
-                Repeat(state: x, min: 1, max: nil).token("Char")
+                Repeated(state: x, min: 1, max: nil).token("Char")
                 ).token("quote"),
             LoopingCharacters(except: "\u{04}\"").token("otherStuff")
         )
