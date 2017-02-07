@@ -26,7 +26,7 @@ class stateTestChar: XCTestCase {
     func testChar(){
         
         
-        tokenizer.branch(
+        _ = tokenizer.branch(
             char("xyz1").token("character"),
             OKStandard.eot
         )

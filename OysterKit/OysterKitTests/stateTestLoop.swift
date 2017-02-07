@@ -20,11 +20,7 @@ class stateTestLoop: XCTestCase {
                             LoopingCharacters(except: "\"\\").token("character")
                             )
         tokenizer.branch(
-            Delimited(delimiter: "\"", states:
-                Repeated(state: x, min: 1, max: nil).token("Char")
-                ).token("quote"),
-            LoopingCharacters(except: "\u{04}\"").token("otherStuff")
-        )
+            Delimited(delimiter: "\"", states: Repeated(state: x, min: 1, max: nil).token("Char")).token("quote"), LoopingCharacters("\u{04}\"").token("otherStuff"))
 
         let testString = "The \"quick \\\"brown\" fox jumps over the lazy dog"
 
@@ -33,7 +29,7 @@ class stateTestLoop: XCTestCase {
 
     func testLoopingChar() {
         
-        tokenizer.branch(
+        _ = tokenizer.branch(
             OKStandard.whiteSpaces,
             LoopingCharacters(from: lowerCaseLetterString+upperCaseLetterString).token("word"),
             OKStandard.eot

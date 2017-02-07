@@ -50,7 +50,7 @@ class stateTestRepeat: XCTestCase {
     }
 
     func testSentance(){
-        tokenizer.branch(
+        _ = tokenizer.branch(
             OKStandard.word,
             OKStandard.whiteSpaces,
             OKStandard.eot

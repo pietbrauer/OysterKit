@@ -27,7 +27,7 @@ class standardTokensTest: XCTestCase {
     func testNumber(){
 
         
-        tokenizer.branch(
+        _ = tokenizer.branch(
             OKStandard.number,
             OKStandard.eot
         )
@@ -63,7 +63,7 @@ class standardTokensTest: XCTestCase {
     }
     
     func testSimpleString(){
-        tokenizer.branch(
+        _ = tokenizer.branch(
             OKStandard.blanks,
             OKStandard.number,
             OKStandard.word,
@@ -82,7 +82,7 @@ class standardTokensTest: XCTestCase {
     }
     
     func testWhiteSpaces(){
-        tokenizer.branch(
+        _ = tokenizer.branch(
             OKStandard.Code.quotedStringIncludingQuotes,
             OKStandard.whiteSpaces,
             OKStandard.number,
@@ -117,7 +117,7 @@ class standardTokensTest: XCTestCase {
     }
     
     func testQuotedString(){
-        tokenizer.branch(
+        _ = tokenizer.branch(
             OKStandard.Code.quotedStringIncludingQuotes,
             OKStandard.blanks,
             OKStandard.number,

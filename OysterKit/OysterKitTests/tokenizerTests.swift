@@ -148,7 +148,7 @@ class tokenizerTests: XCTestCase {
             tokFileTokDef += tokFileTokDef
             
             self.measure() {
-                OKScriptTokenizer().tokenize(tokFileTokDef)
+                _ = OKScriptTokenizer().tokenize(tokFileTokDef)
             }
         }
         

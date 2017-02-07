@@ -14,7 +14,7 @@ class stateTestBranch: XCTestCase {
 
     func testBranch(){
         let branch = char("x").branch(char("y").token("xy"), char("z").token("xz"))
-        tokenizer.branch(branch, OKStandard.eot)
+        _ = tokenizer.branch(branch, OKStandard.eot)
         XCTAssert(tokenizer.tokenize("xyxz") == [token("xy"),token("xz")])
     }
 
@@ -29,7 +29,7 @@ class stateTestBranch: XCTestCase {
         let bracketedWithRepeat = Delimited(open: "(", close: ")", states: lettersWithRepeat).token("bracket")
         let bracketedWithLoop = Delimited(open: "(", close: ")", states: lettersWithLoop).token("bracket")
 
-        tokenizer.branch([
+        _ = tokenizer.branch([
             bracketedWithLoop,
             seperator,
             space
@@ -51,13 +51,13 @@ class stateTestBranch: XCTestCase {
 
     func testNestedBranch(){
         let branch = Branch(states: [char("x").branch(char("y").token("xy"), char("z").token("xz"))])
-        tokenizer.branch(branch)
+        _ = tokenizer.branch(branch)
         XCTAssert(tokenizer.tokenize("xyxz") == [token("xy"),token("xz")])
     }
 
     func testXY(){
-        tokenizer.sequence(char("x"),char("y").token("xy"))
-        tokenizer.branch(OKStandard.eot)
+        _ = tokenizer.sequence(char("x"),char("y").token("xy"))
+        _ = tokenizer.branch(OKStandard.eot)
         
         XCTAssert(tokenizer.tokenize("xy") == [token("xy")], "Chained results do not match")
     }
@@ -66,7 +66,7 @@ class stateTestBranch: XCTestCase {
     func testSequence1(){
         let expectedResults = [token("done",chars:"xyz")]
         
-        tokenizer.branch(
+        _ = tokenizer.branch(
             sequence(char("x"),char("y"),char("z").token("done")),
             OKStandard.eot
         )
@@ -77,7 +77,7 @@ class stateTestBranch: XCTestCase {
     func testSequence2(){
         let expectedResults = [token("done",chars:"xyz")]
         
-        tokenizer.branch(
+        _ = tokenizer.branch(
             char("x").sequence(char("y"),char("z").token("done")),
             OKStandard.eot
         )

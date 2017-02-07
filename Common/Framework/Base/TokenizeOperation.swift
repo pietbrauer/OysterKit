@@ -136,7 +136,7 @@ open class TokenizeOperation : CustomStringConvertible {
             current = eot
         }
 
-        context.__currentIndex = context.consumedCharacters.index(after: context.__currentIndex)
+        context.__currentIndex = context.__currentIndex.successor(in: context.__sourceString)
         context.currentPosition += 1
     }
 
@@ -228,5 +228,19 @@ extension TokenizeOperation : EmancipatedTokenizer {
                 _ = __publishTokens(context)
             }
         }
+    }
+}
+
+extension String.Index{
+    func successor(in string:String)->String.Index{
+        return string.index(after: self)
+    }
+
+    func predecessor(in string:String)->String.Index{
+        return string.index(before: self)
+    }
+
+    func advance(_ offset:Int, `for` string:String)->String.Index{
+        return string.index(self, offsetBy: offset)
     }
 }

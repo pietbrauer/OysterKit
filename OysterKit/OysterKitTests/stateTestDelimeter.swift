@@ -24,7 +24,7 @@ class stateTestDelimeter: XCTestCase {
     }
 
     func testSimple() {
-        tokenizer.branch(
+        _ = tokenizer.branch(
             Delimited(delimiter: "\"", states:OKStandard.letter).token("quoted-string"),
             OKStandard.eot
         )
@@ -38,7 +38,7 @@ class stateTestDelimeter: XCTestCase {
     func testNestedQuotedString(){
         let tougherTest = "1.5 Nasty example with -10 or 10.5 maybe even 1.0e-10 \"Great \\(variableName) \\t 🐨 \\\"Nested\\\" quote\"!"
         
-        tokenizer.branch(
+        _ = tokenizer.branch(
             Delimited(delimiter:"\"",states:
                 char("\\").branch(
                     char("t\"").token("character"),

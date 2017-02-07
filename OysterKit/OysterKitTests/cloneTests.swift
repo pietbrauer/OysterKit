@@ -28,8 +28,8 @@ class cloneTests: XCTestCase {
     }
     
     func tokenizersProduceSameOutput(_ startState:TokenizationState, testString:String = "AABBBAABA"){
-        ot.branch(startState)
-        ct.branch(startState.clone())
+        _ = ot.branch(startState)
+        _ = ct.branch(startState.clone())
         
         let originalTokens = ot.tokenize(testString)
         let clonedTokens = ct.tokenize(testString)
@@ -50,7 +50,7 @@ class cloneTests: XCTestCase {
     
     func testCloneRepeatAndChar() {
         tokenizersProduceSameOutput(
-            Repeated(state:aToken.clone()).token("A's")
+            Repeated(count: aToken.clone(), repeatedValue: nil).token("A's")
         )
     }
 

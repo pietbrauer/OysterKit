@@ -26,7 +26,7 @@ class stateTestKeywords: XCTestCase {
     }
 
     func testKeywords() {
-        tokenizer.branch(
+        _ = tokenizer.branch(
             Keywords(validStrings: ["let","var","func"]).branch(
                     OKStandard.word.token("variable"),
                     Exit().token("keyword")
