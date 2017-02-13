@@ -398,7 +398,7 @@ open class OKScriptParser:StackParser{
         for token in simpleTokenizer.tokenize(characters){
             switch token.name {
             case "unicode":
-                let hexDigits = token.characters[token.characters.index(after: token.characters.index(after: token.characters.startIndex))..<token.characters.endIndex]
+                let hexDigits = token.characters[token.characters.startIndex.successor(in: token.characters).successor(in: token.characters)..<token.characters.endIndex]
                 if let intValue = Int(hexDigits) {
                     let unicodeCharacter = UnicodeScalar(intValue)
                     output += "\(unicodeCharacter)"

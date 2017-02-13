@@ -136,7 +136,7 @@ open class TokenizeOperation : CustomStringConvertible {
             current = eot
         }
 
-        context.__currentIndex = context.__currentIndex.successor(in: context.__sourceString)
+        context.__currentIndex = context.__currentIndex.successor(in: __sourceString)
         context.currentPosition += 1
     }
 
