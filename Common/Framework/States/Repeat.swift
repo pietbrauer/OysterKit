@@ -112,7 +112,7 @@ open class Repeat : TokenizationState{
         if minimumRepeats != 1 || maximumRepeats != nil {
             output+=",\(minimumRepeats)"
             if (maximumRepeats != nil) {
-                output+=",\(maximumRepeats)"
+                output+=",\(maximumRepeats ?? 0)"
             }
         }
         

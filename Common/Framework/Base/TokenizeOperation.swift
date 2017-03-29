@@ -73,7 +73,7 @@ open class TokenizeOperation : CustomStringConvertible {
     }
 
     open var description : String {
-        var output = "Tokenization Operation State\n\tCurrent=\(current) Next=\(next) scanAdvanced=\(scanAdvanced) Complete=\(complete)\n"
+        var output = "Tokenization Operation State\n\tCurrent=\(current) Next=\(String(describing: next)) scanAdvanced=\(scanAdvanced) Complete=\(complete)\n"
 
         //Print the context stack
         for index in __contextStack.endIndex-1...0 {
