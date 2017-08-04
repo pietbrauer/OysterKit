@@ -35,28 +35,26 @@ public let puncuationString = "!\"#$%&'()*+,\\-./:;<=>?@[]^_`{|}~"
 public let blankString = " \t"
 public let whiteSpaceString = " \t\r\n"
 public let lowerCaseLetterString = "abcdefghijklmnopqrstuvwxyz"
-public let upperCaseLetterString = lowerCaseLetterString.uppercaseString
+public let upperCaseLetterString = lowerCaseLetterString.uppercased()
 public let eotString = "\u{0004}"
 
-public class OKStandard{
+open class OKStandard{
     //Public
-    public class var decimalDigit:TokenizationState{
+    open class var decimalDigit:TokenizationState{
         return Characters(from: decimalDigitString).token("digit")
     }
     
-    public class var hexDigit:TokenizationState{
+    open class var hexDigit:TokenizationState{
         return Characters(from: hexDigitString).token("xdigit")
     }
     
-    public class var punctuation:TokenizationState{
+    open class var punctuation:TokenizationState{
         return Characters(from: puncuationString).token("punct")
     }
     
-    public class var eot:TokenizationState{
+    open class var eot:TokenizationState{
         class EOTState : TokenizationState{
-            override func scan(operation: TokenizeOperation) {
-                operation.debug(operation: "Entered EOTState")
-                
+            override func scan(_ operation: TokenizeOperation) {
                 if operation.current == "\u{04}" {
                     //Emit a token, branch on
                     emitToken(operation)
@@ -65,42 +63,42 @@ public class OKStandard{
         }
 
         return EOTState().token(){ (state:TokenizationState, capturedCharacters:String, startIndex:Int)->Token in
-            var token = Token.EndOfTransmissionToken()
+            let token = Token.EndOfTransmissionToken()
             token.originalStringIndex = startIndex
             return token
         }
     }
     
-    public class var blank:TokenizationState{
+    open class var blank:TokenizationState{
         return Characters(from: blankString).token("blank")
     }
     
-    public class var whiteSpace:TokenizationState{
+    open class var whiteSpace:TokenizationState{
         return Characters(from: whiteSpaceString).token("space")
     }
     
-    public class var lowercaseLetter:TokenizationState{
+    open class var lowercaseLetter:TokenizationState{
         return Characters(from: lowerCaseLetterString).token("lower")
     }
     
-    public class var uppercaseLetter:TokenizationState{
+    open class var uppercaseLetter:TokenizationState{
         return Characters(from:upperCaseLetterString).token("upper")
     }
     
-    public class var letter:TokenizationState{
+    open class var letter:TokenizationState{
         return Characters(from: lowerCaseLetterString+upperCaseLetterString).token("alpha")
     }
     
-    public class var letterOrDigit:TokenizationState{
+    open class var letterOrDigit:TokenizationState{
         return Characters(from: lowerCaseLetterString+upperCaseLetterString+decimalDigitString).token("alnum")
     }
     
-    public class var wordCharacter:TokenizationState{
+    open class var wordCharacter:TokenizationState{
         return Characters(from: lowerCaseLetterString+upperCaseLetterString+decimalDigitString+"_").token("word")
     }
     
     
-    public class var number:TokenizationState{
+    open class var number:TokenizationState{
         let decimalDigits = LoopingCharacters(from:decimalDigitString)
         let sign = Characters(from:"+-")
         let exponentCharacter = Characters(from:"eE")
@@ -135,30 +133,30 @@ public class OKStandard{
         return number
     }
     
-    public class var word:TokenizationState{
+    open class var word:TokenizationState{
         return LoopingCharacters(from: lowerCaseLetterString+upperCaseLetterString+decimalDigitString+"_").token("word")
     }
     
 
     
-    public class var blanks:TokenizationState{
+    open class var blanks:TokenizationState{
         return LoopingCharacters(from:blankString).token("blank")
     }
     
-    public class var whiteSpaces:TokenizationState{
+    open class var whiteSpaces:TokenizationState{
         return LoopingCharacters(from: whiteSpaceString).token(WhiteSpaceToken.createToken)
     }
 
-    public class func parseState(stateDefinition:String)->TokenizationState?{
+    open class func parseState(_ stateDefinition:String)->TokenizationState?{
         return OKScriptParser().parseState(stateDefinition)
     }
     
-    public class func parseTokenizer(tokenizerDefinition:String)->Tokenizer?{
+    open class func parseTokenizer(_ tokenizerDefinition:String)->Tokenizer?{
         return OKScriptParser().parse(tokenizerDefinition)
     }
     
-    public class Code {
-        public class var quotedString:TokenizationState{
+    open class Code {
+        open class var quotedString:TokenizationState{
         return Delimited(delimiter: "\"", states:
             Repeat(state:Branch().branch(
                 Characters(from:"\\").branch(
@@ -169,11 +167,11 @@ public class OKStandard{
             )
         }
         
-        public class var quotedStringIncludingQuotes:TokenizationState{
+        open class var quotedStringIncludingQuotes:TokenizationState{
             return quotedString.token("double-quote")
         }
         
-        public class var quotedCharacter:TokenizationState{
+        open class var quotedCharacter:TokenizationState{
         return Delimited(delimiter: "'", states:
             Repeat(state:Branch().branch(
                 Characters(from:"\\").branch(
@@ -184,12 +182,12 @@ public class OKStandard{
             )
         }
         
-        public class var quotedCharacterIncludingQuotes:TokenizationState{
+        open class var quotedCharacterIncludingQuotes:TokenizationState{
         return quotedCharacter.token("quote")
         }
     
         
-        public class var variableName:TokenizationState{
+        open class var variableName:TokenizationState{
         return Characters(from:lowerCaseLetterString+upperCaseLetterString).sequence(
                 LoopingCharacters(from:lowerCaseLetterString+upperCaseLetterString+decimalDigitString+"_-").token("variable")
             )

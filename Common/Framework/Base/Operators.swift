@@ -32,10 +32,10 @@ import Foundation
 // Creates a sequence from the first state to the last state, returning the first
 // state
 //
-public func sequence(states:TokenizationState...)->TokenizationState{
+public func sequence(_ states:TokenizationState...)->TokenizationState{
     
     for i in 1..<states.count {
-        states[i-1].branch(states[i])
+        _ = states[i-1].branch(states[i])
     }
     
     return states[0]

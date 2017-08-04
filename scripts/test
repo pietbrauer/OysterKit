@@ -1,0 +1,41 @@
+set -x
+
+pre() {
+    bundle install --path vendor/bundle
+}
+
+test() {
+    set -o pipefail && xcodebuild -workspace OysterKit\ Workspace.xcworkspace -scheme "OysterKit iOS" build test -sdk iphonesimulator ONLY_ACTIVE_ARCH=NO -destination name="iPhone 6s" | xcpretty -c
+}
+
+if [ "$#" -eq 0 -o "$#" -gt 2 ]; then
+    exit 1
+fi
+
+COMMAND="$1"
+
+case "$COMMAND" in
+
+    ######################################
+    # Bootstrap
+    ######################################
+    "bootstrap")
+      pre
+      exit $?
+        ;;
+
+    ######################################
+    # Test
+    ######################################
+    "test")
+      test
+      exit $?
+      ;;
+  *)
+
+  echo "Unknown command '$COMMAND'"
+  exit 1
+    ;;
+
+
+esac

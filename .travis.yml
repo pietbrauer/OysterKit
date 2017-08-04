@@ -1,0 +1,6 @@
+osx_image: xcode8.2
+language: objective-c
+before_install:
+    - ./scripts/test bootstrap
+script:
+    - ./scripts/test test

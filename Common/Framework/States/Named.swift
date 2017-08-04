@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class Named : TokenizationState {
+open class Named : TokenizationState {
     let name:String
     let rootState:TokenizationState
     var endState:TokenizationState
@@ -25,19 +25,19 @@ public class Named : TokenizationState {
         return "Named"
     }
     
-    public override func token(with: TokenCreationBlock) -> TokenizationState {
-        endState.token(with)
+    open override func token(_ with: @escaping TokenCreationBlock) -> TokenizationState {
+        _ = endState.token(with)
         return self
     }
     
-    public override func branch(toStates: [TokenizationState])->TokenizationState{
-        endState.branch(toStates)
+    open override func branch(_ toStates: [TokenizationState])->TokenizationState{
+        _ = endState.branch(toStates)
         endState = toStates[toStates.endIndex-1]
         
         return endState
     }
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
         if let originalEnd:TokenizationState = cloneTimeEnd {
             return name+originalEnd.pseudoTokenNameSuffix()+originalEnd.serializeBranches(indentation)
         } else {
@@ -54,13 +54,10 @@ public class Named : TokenizationState {
         }
     }
     
-    override public func clone()->TokenizationState {
+    override open func clone()->TokenizationState {
         //Create a "new" named state with the root set as a clone of our root
-        var newState = Named(name:name,root: rootState.clone())
-        
-//        println(self.rootState.description)
-//        println(newState.rootState.description)
-        
+        let newState = Named(name:name,root: rootState.clone())
+
         newState.endState = newState.rootState.lowLeaf()
         newState.cloneTimeEnd = endState
 
@@ -68,9 +65,7 @@ public class Named : TokenizationState {
         return newState
     }
     
-    public override func scan(operation: TokenizeOperation) {
-        operation.debug(operation: "Entered Named "+name)
-        
+    open override func scan(_ operation: TokenizeOperation) {
         rootState.scan(operation)
     }
 }

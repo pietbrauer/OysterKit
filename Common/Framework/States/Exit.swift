@@ -8,19 +8,17 @@
 
 import Foundation
 
-public class Exit : TokenizationState {
+open class Exit : TokenizationState {
     
     public override init(){
         super.init()
     }
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
         return "^"+pseudoTokenNameSuffix()
     }
     
-    public override func scan(operation: TokenizeOperation) {
-        operation.debug(operation: "Entered Exit")
-        
+    open override func scan(_ operation: TokenizeOperation) {
         emitToken(operation)
     }
 }

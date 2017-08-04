@@ -28,7 +28,7 @@ import Foundation
 
 let __emancipateStates = true
 
-public class Tokenizer : TokenizationState {
+open class Tokenizer : TokenizationState {
     var namedStates = [String:Named]()
     
     public override init(){
@@ -40,13 +40,13 @@ public class Tokenizer : TokenizationState {
         branches = states
     }
     
-    public func tokenize(string: String, newToken: (Token)->Bool) {
-        var emancipatedTokenization = TokenizeOperation(legacyTokenizer: self)
+    open func tokenize(_ string: String, newToken: @escaping (Token)->Bool) {
+        let emancipatedTokenization = TokenizeOperation(legacyTokenizer: self)
         
         emancipatedTokenization.tokenize(string, tokenReceiver: newToken)
     }
     
-    public func tokenize(string:String) -> Array<Token>{
+    open func tokenize(_ string:String) -> [Token]{
         var tokens = Array<Token>()
         
         tokenize(string, newToken: {(token:Token)->Bool in
@@ -57,22 +57,22 @@ public class Tokenizer : TokenizationState {
         return tokens
     }
     
-    override public class func convertFromStringLiteral(value: String) -> Tokenizer {
+    override open class func convertFromStringLiteral(_ value: String) -> Tokenizer {
         if let parsedTokenizer = OKStandard.parseTokenizer(value) {
             return parsedTokenizer
         }
         return Tokenizer()
     }
     
-    override public class func convertFromExtendedGraphemeClusterLiteral(value: String) -> Tokenizer {
+    override open class func convertFromExtendedGraphemeClusterLiteral(_ value: String) -> Tokenizer {
         return Tokenizer.convertFromStringLiteral(value)
     }
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
         var output = ""
         
         for (name,state) in namedStates {
-            let description = state.serialize("")
+            _ = state.serialize("")
             output+="\(name) = \(state.rootState.description)\n"
         }
         

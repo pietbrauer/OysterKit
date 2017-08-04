@@ -27,14 +27,14 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-public class Delimited : TokenizationState{
+open class Delimited : TokenizationState{
     
     class PoppingChar : Characters {
         
-        override func scan(operation: TokenizeOperation) {
+        override func scan(_ operation: TokenizeOperation) {
             //If it is the delimiter character, pop the state and emit our token (if any)
             if isAllowed(operation.current) {
-                operation.popContext(publishTokens: true)
+                operation.popContext(true)
                 operation.context.flushConsumedCharacters()
                 operation.advance()
                 emitToken(operation) //Will not emit something if it has not been told to, need to propagate the token generator (or make sure it has been)
@@ -96,12 +96,11 @@ public class Delimited : TokenizationState{
     // Popping state setup and maintenance
     //
     func preparePoppingState() {
-        delimetedStates.insert(poppingState, atIndex: 0)
+        delimetedStates.insert(poppingState, at: 0)
     }
     
     
-    public override func scan(operation: TokenizeOperation) {
-        operation.debug(operation: "Entered \(openingDelimiter)Delimited\(poppingState.allowedCharacters)")
+    open override func scan(_ operation: TokenizeOperation) {
         if openingDelimiter != operation.current {
             return
         }
@@ -117,23 +116,23 @@ public class Delimited : TokenizationState{
     //
     // Assigned token propagation
     //
-    public override func token(with: TokenCreationBlock) -> TokenizationState {
-        super.token(with)
-        poppingState.token(with)
+    open override func token(_ with: @escaping TokenCreationBlock) -> TokenizationState {
+        _ = super.token(with)
+        _ = poppingState.token(with)
         return self
     }
     
     //
     // Serialization
     //
-    func escapeDelimiter(delimiter:Character)->String {
+    func escapeDelimiter(_ delimiter:Character)->String {
         if delimiter == "'" {
             return "\\'"
         }
         return "\(delimiter)"
     }
     
-    override func serialize(indentation: String) -> String {
+    override func serialize(_ indentation: String) -> String {
 
         var output = ""
         
@@ -147,9 +146,8 @@ public class Delimited : TokenizationState{
         }
         
         output += "{"
-        var first = true
-        
-        var subStates = Array(delimetedStates[1..<self.delimetedStates.endIndex])
+
+        let subStates = Array(delimetedStates[self.delimetedStates.indices.suffix(from: 1)])
         output += serializeStateArray(indentation+"\t", states: subStates)
         
         output+="}"
@@ -157,10 +155,10 @@ public class Delimited : TokenizationState{
         return output+">"+serializeBranches(indentation+"\t")
     }
 
-    override public func clone() -> TokenizationState {
-        var newState = Delimited(open: "\(openingDelimiter)", close: "\(poppingState.allowedCharacters)")
+    override open func clone() -> TokenizationState {
+        let newState = Delimited(open: "\(openingDelimiter)", close: "\(poppingState.allowedCharacters)")
         
-        for delimitedState in delimetedStates {
+        for _ in delimetedStates {
             //Woo-hoo correct array semantics!
             newState.delimetedStates=delimetedStates
         }

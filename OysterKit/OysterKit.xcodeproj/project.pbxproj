@@ -1,0 +1,807 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		23E965A51BD4C2CF007ED3D6 /* OysterKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 23E965A41BD4C2CF007ED3D6 /* OysterKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23E965AC1BD4C2CF007ED3D6 /* OysterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E965A11BD4C2CF007ED3D6 /* OysterKit.framework */; };
+		23E965C21BD4C30A007ED3D6 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965BD1BD4C30A007ED3D6 /* Operators.swift */; };
+		23E965C31BD4C30A007ED3D6 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965BE1BD4C30A007ED3D6 /* Token.swift */; };
+		23E965C41BD4C30A007ED3D6 /* TokenizationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965BF1BD4C30A007ED3D6 /* TokenizationState.swift */; };
+		23E965C51BD4C30A007ED3D6 /* TokenizeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965C01BD4C30A007ED3D6 /* TokenizeOperation.swift */; };
+		23E965C61BD4C30A007ED3D6 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965C11BD4C30A007ED3D6 /* Tokenizer.swift */; };
+		23E965D21BD4C32B007ED3D6 /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CA1BD4C32B007ED3D6 /* Branch.swift */; };
+		23E965D31BD4C32B007ED3D6 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CB1BD4C32B007ED3D6 /* Characters.swift */; };
+		23E965D41BD4C32B007ED3D6 /* Delimited.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CC1BD4C32B007ED3D6 /* Delimited.swift */; };
+		23E965D51BD4C32B007ED3D6 /* Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CD1BD4C32B007ED3D6 /* Exit.swift */; };
+		23E965D61BD4C32B007ED3D6 /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CE1BD4C32B007ED3D6 /* Keywords.swift */; };
+		23E965D71BD4C32B007ED3D6 /* LoopingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CF1BD4C32B007ED3D6 /* LoopingCharacters.swift */; };
+		23E965D81BD4C32B007ED3D6 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965D01BD4C32B007ED3D6 /* Named.swift */; };
+		23E965D91BD4C32B007ED3D6 /* Repeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965D11BD4C32B007ED3D6 /* Repeat.swift */; };
+		23E965DE1BD4C335007ED3D6 /* OKScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DA1BD4C335007ED3D6 /* OKScriptParser.swift */; };
+		23E965DF1BD4C335007ED3D6 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DB1BD4C335007ED3D6 /* Parser.swift */; };
+		23E965E01BD4C335007ED3D6 /* RPNParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DC1BD4C335007ED3D6 /* RPNParser.swift */; };
+		23E965E11BD4C335007ED3D6 /* SYExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DD1BD4C335007ED3D6 /* SYExpressionParser.swift */; };
+		23E965E31BD4C33D007ED3D6 /* OKStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E21BD4C33D007ED3D6 /* OKStandard.swift */; };
+		23E965EF1BD4C37F007ED3D6 /* cloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E41BD4C37F007ED3D6 /* cloneTests.swift */; };
+		23E965F01BD4C37F007ED3D6 /* parserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E51BD4C37F007ED3D6 /* parserTests.swift */; };
+		23E965F11BD4C37F007ED3D6 /* standardTokensTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E61BD4C37F007ED3D6 /* standardTokensTest.swift */; };
+		23E965F21BD4C37F007ED3D6 /* stateTestBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E71BD4C37F007ED3D6 /* stateTestBranch.swift */; };
+		23E965F31BD4C37F007ED3D6 /* stateTestChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E81BD4C37F007ED3D6 /* stateTestChar.swift */; };
+		23E965F41BD4C37F007ED3D6 /* stateTestDelimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E91BD4C37F007ED3D6 /* stateTestDelimeter.swift */; };
+		23E965F51BD4C37F007ED3D6 /* stateTestKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EA1BD4C37F007ED3D6 /* stateTestKeywords.swift */; };
+		23E965F61BD4C37F007ED3D6 /* stateTestLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EB1BD4C37F007ED3D6 /* stateTestLoop.swift */; };
+		23E965F71BD4C37F007ED3D6 /* stateTestRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EC1BD4C37F007ED3D6 /* stateTestRepeat.swift */; };
+		23E965F81BD4C37F007ED3D6 /* TestingSupportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965ED1BD4C37F007ED3D6 /* TestingSupportFunctions.swift */; };
+		23E965F91BD4C37F007ED3D6 /* tokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EE1BD4C37F007ED3D6 /* tokenizerTests.swift */; };
+		23E966091BD4C396007ED3D6 /* OysterKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 23E965FF1BD4C396007ED3D6 /* OysterKit.framework */; };
+		23E966161BD4C3D0007ED3D6 /* OKStandard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E21BD4C33D007ED3D6 /* OKStandard.swift */; };
+		23E966171BD4C3D0007ED3D6 /* Branch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CA1BD4C32B007ED3D6 /* Branch.swift */; };
+		23E966181BD4C3D0007ED3D6 /* Characters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CB1BD4C32B007ED3D6 /* Characters.swift */; };
+		23E966191BD4C3D0007ED3D6 /* Delimited.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CC1BD4C32B007ED3D6 /* Delimited.swift */; };
+		23E9661A1BD4C3D0007ED3D6 /* Exit.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CD1BD4C32B007ED3D6 /* Exit.swift */; };
+		23E9661B1BD4C3D0007ED3D6 /* Keywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CE1BD4C32B007ED3D6 /* Keywords.swift */; };
+		23E9661C1BD4C3D0007ED3D6 /* LoopingCharacters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965CF1BD4C32B007ED3D6 /* LoopingCharacters.swift */; };
+		23E9661D1BD4C3D0007ED3D6 /* Named.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965D01BD4C32B007ED3D6 /* Named.swift */; };
+		23E9661E1BD4C3D0007ED3D6 /* Repeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965D11BD4C32B007ED3D6 /* Repeat.swift */; };
+		23E9661F1BD4C3D0007ED3D6 /* OKScriptParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DA1BD4C335007ED3D6 /* OKScriptParser.swift */; };
+		23E966201BD4C3D1007ED3D6 /* Parser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DB1BD4C335007ED3D6 /* Parser.swift */; };
+		23E966211BD4C3D1007ED3D6 /* RPNParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DC1BD4C335007ED3D6 /* RPNParser.swift */; };
+		23E966221BD4C3D1007ED3D6 /* SYExpressionParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965DD1BD4C335007ED3D6 /* SYExpressionParser.swift */; };
+		23E966231BD4C3D1007ED3D6 /* Operators.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965BD1BD4C30A007ED3D6 /* Operators.swift */; };
+		23E966241BD4C3D1007ED3D6 /* Token.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965BE1BD4C30A007ED3D6 /* Token.swift */; };
+		23E966251BD4C3D1007ED3D6 /* TokenizationState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965BF1BD4C30A007ED3D6 /* TokenizationState.swift */; };
+		23E966261BD4C3D1007ED3D6 /* TokenizeOperation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965C01BD4C30A007ED3D6 /* TokenizeOperation.swift */; };
+		23E966271BD4C3D1007ED3D6 /* Tokenizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965C11BD4C30A007ED3D6 /* Tokenizer.swift */; };
+		23E966281BD4C3DA007ED3D6 /* OysterKit.h in Headers */ = {isa = PBXBuildFile; fileRef = 23E965A41BD4C2CF007ED3D6 /* OysterKit.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		23E966291BD4C3E7007ED3D6 /* cloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E41BD4C37F007ED3D6 /* cloneTests.swift */; };
+		23E9662A1BD4C3E7007ED3D6 /* parserTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E51BD4C37F007ED3D6 /* parserTests.swift */; };
+		23E9662B1BD4C3E7007ED3D6 /* standardTokensTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E61BD4C37F007ED3D6 /* standardTokensTest.swift */; };
+		23E9662C1BD4C3E7007ED3D6 /* stateTestBranch.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E71BD4C37F007ED3D6 /* stateTestBranch.swift */; };
+		23E9662D1BD4C3E7007ED3D6 /* stateTestChar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E81BD4C37F007ED3D6 /* stateTestChar.swift */; };
+		23E9662E1BD4C3E7007ED3D6 /* stateTestDelimeter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965E91BD4C37F007ED3D6 /* stateTestDelimeter.swift */; };
+		23E9662F1BD4C3E7007ED3D6 /* stateTestKeywords.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EA1BD4C37F007ED3D6 /* stateTestKeywords.swift */; };
+		23E966301BD4C3E7007ED3D6 /* stateTestLoop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EB1BD4C37F007ED3D6 /* stateTestLoop.swift */; };
+		23E966311BD4C3E7007ED3D6 /* stateTestRepeat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EC1BD4C37F007ED3D6 /* stateTestRepeat.swift */; };
+		23E966321BD4C3E7007ED3D6 /* TestingSupportFunctions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965ED1BD4C37F007ED3D6 /* TestingSupportFunctions.swift */; };
+		23E966331BD4C3E7007ED3D6 /* tokenizerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23E965EE1BD4C37F007ED3D6 /* tokenizerTests.swift */; };
+		23E966381BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */ = {isa = PBXBuildFile; fileRef = 23E966371BD4C510007ED3D6 /* referenceOKScriptDefinition.txt */; };
+		23E966391BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */ = {isa = PBXBuildFile; fileRef = 23E966371BD4C510007ED3D6 /* referenceOKScriptDefinition.txt */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		23E965AD1BD4C2CF007ED3D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23E965981BD4C2CF007ED3D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23E965A01BD4C2CF007ED3D6;
+			remoteInfo = OysterKit;
+		};
+		23E9660A1BD4C396007ED3D6 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 23E965981BD4C2CF007ED3D6 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 23E965FE1BD4C396007ED3D6;
+			remoteInfo = "OysterKit Mac";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		23E965A11BD4C2CF007ED3D6 /* OysterKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OysterKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23E965A41BD4C2CF007ED3D6 /* OysterKit.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = OysterKit.h; sourceTree = "<group>"; };
+		23E965A61BD4C2CF007ED3D6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23E965AB1BD4C2CF007ED3D6 /* OysterKit iOSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OysterKit iOSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23E965BD1BD4C30A007ED3D6 /* Operators.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Operators.swift; path = ../../Common/Framework/Base/Operators.swift; sourceTree = "<group>"; };
+		23E965BE1BD4C30A007ED3D6 /* Token.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Token.swift; path = ../../Common/Framework/Base/Token.swift; sourceTree = "<group>"; };
+		23E965BF1BD4C30A007ED3D6 /* TokenizationState.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenizationState.swift; path = ../../Common/Framework/Base/TokenizationState.swift; sourceTree = "<group>"; };
+		23E965C01BD4C30A007ED3D6 /* TokenizeOperation.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TokenizeOperation.swift; path = ../../Common/Framework/Base/TokenizeOperation.swift; sourceTree = "<group>"; };
+		23E965C11BD4C30A007ED3D6 /* Tokenizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Tokenizer.swift; path = ../../Common/Framework/Base/Tokenizer.swift; sourceTree = "<group>"; };
+		23E965CA1BD4C32B007ED3D6 /* Branch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Branch.swift; path = ../../Common/Framework/States/Branch.swift; sourceTree = "<group>"; };
+		23E965CB1BD4C32B007ED3D6 /* Characters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Characters.swift; path = ../../Common/Framework/States/Characters.swift; sourceTree = "<group>"; };
+		23E965CC1BD4C32B007ED3D6 /* Delimited.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Delimited.swift; path = ../../Common/Framework/States/Delimited.swift; sourceTree = "<group>"; };
+		23E965CD1BD4C32B007ED3D6 /* Exit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Exit.swift; path = ../../Common/Framework/States/Exit.swift; sourceTree = "<group>"; };
+		23E965CE1BD4C32B007ED3D6 /* Keywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Keywords.swift; path = ../../Common/Framework/States/Keywords.swift; sourceTree = "<group>"; };
+		23E965CF1BD4C32B007ED3D6 /* LoopingCharacters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoopingCharacters.swift; path = ../../Common/Framework/States/LoopingCharacters.swift; sourceTree = "<group>"; };
+		23E965D01BD4C32B007ED3D6 /* Named.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Named.swift; path = ../../Common/Framework/States/Named.swift; sourceTree = "<group>"; };
+		23E965D11BD4C32B007ED3D6 /* Repeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Repeat.swift; path = ../../Common/Framework/States/Repeat.swift; sourceTree = "<group>"; };
+		23E965DA1BD4C335007ED3D6 /* OKScriptParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OKScriptParser.swift; path = ../../Common/Framework/Parsing/OKScriptParser.swift; sourceTree = "<group>"; };
+		23E965DB1BD4C335007ED3D6 /* Parser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Parser.swift; path = ../../Common/Framework/Parsing/Parser.swift; sourceTree = "<group>"; };
+		23E965DC1BD4C335007ED3D6 /* RPNParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RPNParser.swift; path = ../../Common/Framework/Parsing/RPNParser.swift; sourceTree = "<group>"; };
+		23E965DD1BD4C335007ED3D6 /* SYExpressionParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SYExpressionParser.swift; path = ../../Common/Framework/Parsing/SYExpressionParser.swift; sourceTree = "<group>"; };
+		23E965E21BD4C33D007ED3D6 /* OKStandard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = OKStandard.swift; path = ../../Common/Framework/OKStandard.swift; sourceTree = "<group>"; };
+		23E965E41BD4C37F007ED3D6 /* cloneTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = cloneTests.swift; sourceTree = "<group>"; };
+		23E965E51BD4C37F007ED3D6 /* parserTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = parserTests.swift; sourceTree = "<group>"; };
+		23E965E61BD4C37F007ED3D6 /* standardTokensTest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = standardTokensTest.swift; sourceTree = "<group>"; };
+		23E965E71BD4C37F007ED3D6 /* stateTestBranch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stateTestBranch.swift; sourceTree = "<group>"; };
+		23E965E81BD4C37F007ED3D6 /* stateTestChar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stateTestChar.swift; sourceTree = "<group>"; };
+		23E965E91BD4C37F007ED3D6 /* stateTestDelimeter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stateTestDelimeter.swift; sourceTree = "<group>"; };
+		23E965EA1BD4C37F007ED3D6 /* stateTestKeywords.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stateTestKeywords.swift; sourceTree = "<group>"; };
+		23E965EB1BD4C37F007ED3D6 /* stateTestLoop.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stateTestLoop.swift; sourceTree = "<group>"; };
+		23E965EC1BD4C37F007ED3D6 /* stateTestRepeat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = stateTestRepeat.swift; sourceTree = "<group>"; };
+		23E965ED1BD4C37F007ED3D6 /* TestingSupportFunctions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestingSupportFunctions.swift; sourceTree = "<group>"; };
+		23E965EE1BD4C37F007ED3D6 /* tokenizerTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = tokenizerTests.swift; sourceTree = "<group>"; };
+		23E965FF1BD4C396007ED3D6 /* OysterKit.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = OysterKit.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		23E966081BD4C396007ED3D6 /* OysterKit MacTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "OysterKit MacTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		23E966341BD4C4BF007ED3D6 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		23E966371BD4C510007ED3D6 /* referenceOKScriptDefinition.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = referenceOKScriptDefinition.txt; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		23E9659D1BD4C2CF007ED3D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965A81BD4C2CF007ED3D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E965AC1BD4C2CF007ED3D6 /* OysterKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965FB1BD4C396007ED3D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E966051BD4C396007ED3D6 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E966091BD4C396007ED3D6 /* OysterKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		23E965971BD4C2CF007ED3D6 = {
+			isa = PBXGroup;
+			children = (
+				23E965A31BD4C2CF007ED3D6 /* OysterKit */,
+				23E965AF1BD4C2CF007ED3D6 /* OysterKitTests */,
+				23E965A21BD4C2CF007ED3D6 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		23E965A21BD4C2CF007ED3D6 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				23E965A11BD4C2CF007ED3D6 /* OysterKit.framework */,
+				23E965AB1BD4C2CF007ED3D6 /* OysterKit iOSTests.xctest */,
+				23E965FF1BD4C396007ED3D6 /* OysterKit.framework */,
+				23E966081BD4C396007ED3D6 /* OysterKit MacTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		23E965A31BD4C2CF007ED3D6 /* OysterKit */ = {
+			isa = PBXGroup;
+			children = (
+				23E965E21BD4C33D007ED3D6 /* OKStandard.swift */,
+				23E965C91BD4C31A007ED3D6 /* States */,
+				23E965C81BD4C315007ED3D6 /* Parsing */,
+				23E965C71BD4C310007ED3D6 /* Base */,
+				23E965A41BD4C2CF007ED3D6 /* OysterKit.h */,
+				23E965A61BD4C2CF007ED3D6 /* Info.plist */,
+			);
+			path = OysterKit;
+			sourceTree = "<group>";
+		};
+		23E965AF1BD4C2CF007ED3D6 /* OysterKitTests */ = {
+			isa = PBXGroup;
+			children = (
+				23E966371BD4C510007ED3D6 /* referenceOKScriptDefinition.txt */,
+				23E965E41BD4C37F007ED3D6 /* cloneTests.swift */,
+				23E965E51BD4C37F007ED3D6 /* parserTests.swift */,
+				23E965E61BD4C37F007ED3D6 /* standardTokensTest.swift */,
+				23E965E71BD4C37F007ED3D6 /* stateTestBranch.swift */,
+				23E965E81BD4C37F007ED3D6 /* stateTestChar.swift */,
+				23E965E91BD4C37F007ED3D6 /* stateTestDelimeter.swift */,
+				23E965EA1BD4C37F007ED3D6 /* stateTestKeywords.swift */,
+				23E965EB1BD4C37F007ED3D6 /* stateTestLoop.swift */,
+				23E965EC1BD4C37F007ED3D6 /* stateTestRepeat.swift */,
+				23E965ED1BD4C37F007ED3D6 /* TestingSupportFunctions.swift */,
+				23E965EE1BD4C37F007ED3D6 /* tokenizerTests.swift */,
+				23E966341BD4C4BF007ED3D6 /* Info.plist */,
+			);
+			path = OysterKitTests;
+			sourceTree = "<group>";
+		};
+		23E965C71BD4C310007ED3D6 /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				23E965BD1BD4C30A007ED3D6 /* Operators.swift */,
+				23E965BE1BD4C30A007ED3D6 /* Token.swift */,
+				23E965BF1BD4C30A007ED3D6 /* TokenizationState.swift */,
+				23E965C01BD4C30A007ED3D6 /* TokenizeOperation.swift */,
+				23E965C11BD4C30A007ED3D6 /* Tokenizer.swift */,
+			);
+			name = Base;
+			sourceTree = "<group>";
+		};
+		23E965C81BD4C315007ED3D6 /* Parsing */ = {
+			isa = PBXGroup;
+			children = (
+				23E965DA1BD4C335007ED3D6 /* OKScriptParser.swift */,
+				23E965DB1BD4C335007ED3D6 /* Parser.swift */,
+				23E965DC1BD4C335007ED3D6 /* RPNParser.swift */,
+				23E965DD1BD4C335007ED3D6 /* SYExpressionParser.swift */,
+			);
+			name = Parsing;
+			sourceTree = "<group>";
+		};
+		23E965C91BD4C31A007ED3D6 /* States */ = {
+			isa = PBXGroup;
+			children = (
+				23E965CA1BD4C32B007ED3D6 /* Branch.swift */,
+				23E965CB1BD4C32B007ED3D6 /* Characters.swift */,
+				23E965CC1BD4C32B007ED3D6 /* Delimited.swift */,
+				23E965CD1BD4C32B007ED3D6 /* Exit.swift */,
+				23E965CE1BD4C32B007ED3D6 /* Keywords.swift */,
+				23E965CF1BD4C32B007ED3D6 /* LoopingCharacters.swift */,
+				23E965D01BD4C32B007ED3D6 /* Named.swift */,
+				23E965D11BD4C32B007ED3D6 /* Repeat.swift */,
+			);
+			name = States;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		23E9659E1BD4C2CF007ED3D6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E965A51BD4C2CF007ED3D6 /* OysterKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965FC1BD4C396007ED3D6 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E966281BD4C3DA007ED3D6 /* OysterKit.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		23E965A01BD4C2CF007ED3D6 /* OysterKit iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23E965B51BD4C2CF007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit iOS" */;
+			buildPhases = (
+				23E9659C1BD4C2CF007ED3D6 /* Sources */,
+				23E9659D1BD4C2CF007ED3D6 /* Frameworks */,
+				23E9659E1BD4C2CF007ED3D6 /* Headers */,
+				23E9659F1BD4C2CF007ED3D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OysterKit iOS";
+			productName = OysterKit;
+			productReference = 23E965A11BD4C2CF007ED3D6 /* OysterKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		23E965AA1BD4C2CF007ED3D6 /* OysterKit iOSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23E965B81BD4C2CF007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit iOSTests" */;
+			buildPhases = (
+				23E965A71BD4C2CF007ED3D6 /* Sources */,
+				23E965A81BD4C2CF007ED3D6 /* Frameworks */,
+				23E965A91BD4C2CF007ED3D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23E965AE1BD4C2CF007ED3D6 /* PBXTargetDependency */,
+			);
+			name = "OysterKit iOSTests";
+			productName = OysterKitTests;
+			productReference = 23E965AB1BD4C2CF007ED3D6 /* OysterKit iOSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		23E965FE1BD4C396007ED3D6 /* OysterKit Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23E966101BD4C396007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit Mac" */;
+			buildPhases = (
+				23E965FA1BD4C396007ED3D6 /* Sources */,
+				23E965FB1BD4C396007ED3D6 /* Frameworks */,
+				23E965FC1BD4C396007ED3D6 /* Headers */,
+				23E965FD1BD4C396007ED3D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "OysterKit Mac";
+			productName = "OysterKit Mac";
+			productReference = 23E965FF1BD4C396007ED3D6 /* OysterKit.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		23E966071BD4C396007ED3D6 /* OysterKit MacTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 23E966131BD4C396007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit MacTests" */;
+			buildPhases = (
+				23E966041BD4C396007ED3D6 /* Sources */,
+				23E966051BD4C396007ED3D6 /* Frameworks */,
+				23E966061BD4C396007ED3D6 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				23E9660B1BD4C396007ED3D6 /* PBXTargetDependency */,
+			);
+			name = "OysterKit MacTests";
+			productName = "OysterKit MacTests";
+			productReference = 23E966081BD4C396007ED3D6 /* OysterKit MacTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		23E965981BD4C2CF007ED3D6 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "rwe-uk";
+				TargetAttributes = {
+					23E965A01BD4C2CF007ED3D6 = {
+						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0830;
+					};
+					23E965AA1BD4C2CF007ED3D6 = {
+						CreatedOnToolsVersion = 7.0;
+						LastSwiftMigration = 0830;
+					};
+					23E965FE1BD4C396007ED3D6 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+					23E966071BD4C396007ED3D6 = {
+						CreatedOnToolsVersion = 7.0;
+					};
+				};
+			};
+			buildConfigurationList = 23E9659B1BD4C2CF007ED3D6 /* Build configuration list for PBXProject "OysterKit" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 23E965971BD4C2CF007ED3D6;
+			productRefGroup = 23E965A21BD4C2CF007ED3D6 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				23E965A01BD4C2CF007ED3D6 /* OysterKit iOS */,
+				23E965AA1BD4C2CF007ED3D6 /* OysterKit iOSTests */,
+				23E965FE1BD4C396007ED3D6 /* OysterKit Mac */,
+				23E966071BD4C396007ED3D6 /* OysterKit MacTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		23E9659F1BD4C2CF007ED3D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965A91BD4C2CF007ED3D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E966381BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965FD1BD4C396007ED3D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E966061BD4C396007ED3D6 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E966391BD4C510007ED3D6 /* referenceOKScriptDefinition.txt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		23E9659C1BD4C2CF007ED3D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E965C51BD4C30A007ED3D6 /* TokenizeOperation.swift in Sources */,
+				23E965DE1BD4C335007ED3D6 /* OKScriptParser.swift in Sources */,
+				23E965DF1BD4C335007ED3D6 /* Parser.swift in Sources */,
+				23E965D31BD4C32B007ED3D6 /* Characters.swift in Sources */,
+				23E965E31BD4C33D007ED3D6 /* OKStandard.swift in Sources */,
+				23E965D21BD4C32B007ED3D6 /* Branch.swift in Sources */,
+				23E965D61BD4C32B007ED3D6 /* Keywords.swift in Sources */,
+				23E965D41BD4C32B007ED3D6 /* Delimited.swift in Sources */,
+				23E965E01BD4C335007ED3D6 /* RPNParser.swift in Sources */,
+				23E965C61BD4C30A007ED3D6 /* Tokenizer.swift in Sources */,
+				23E965D71BD4C32B007ED3D6 /* LoopingCharacters.swift in Sources */,
+				23E965D91BD4C32B007ED3D6 /* Repeat.swift in Sources */,
+				23E965D81BD4C32B007ED3D6 /* Named.swift in Sources */,
+				23E965C21BD4C30A007ED3D6 /* Operators.swift in Sources */,
+				23E965E11BD4C335007ED3D6 /* SYExpressionParser.swift in Sources */,
+				23E965C31BD4C30A007ED3D6 /* Token.swift in Sources */,
+				23E965D51BD4C32B007ED3D6 /* Exit.swift in Sources */,
+				23E965C41BD4C30A007ED3D6 /* TokenizationState.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965A71BD4C2CF007ED3D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E965F81BD4C37F007ED3D6 /* TestingSupportFunctions.swift in Sources */,
+				23E965F31BD4C37F007ED3D6 /* stateTestChar.swift in Sources */,
+				23E965F61BD4C37F007ED3D6 /* stateTestLoop.swift in Sources */,
+				23E965F71BD4C37F007ED3D6 /* stateTestRepeat.swift in Sources */,
+				23E965F51BD4C37F007ED3D6 /* stateTestKeywords.swift in Sources */,
+				23E965F11BD4C37F007ED3D6 /* standardTokensTest.swift in Sources */,
+				23E965F01BD4C37F007ED3D6 /* parserTests.swift in Sources */,
+				23E965EF1BD4C37F007ED3D6 /* cloneTests.swift in Sources */,
+				23E965F21BD4C37F007ED3D6 /* stateTestBranch.swift in Sources */,
+				23E965F41BD4C37F007ED3D6 /* stateTestDelimeter.swift in Sources */,
+				23E965F91BD4C37F007ED3D6 /* tokenizerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E965FA1BD4C396007ED3D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E966161BD4C3D0007ED3D6 /* OKStandard.swift in Sources */,
+				23E966171BD4C3D0007ED3D6 /* Branch.swift in Sources */,
+				23E966181BD4C3D0007ED3D6 /* Characters.swift in Sources */,
+				23E966191BD4C3D0007ED3D6 /* Delimited.swift in Sources */,
+				23E9661A1BD4C3D0007ED3D6 /* Exit.swift in Sources */,
+				23E9661B1BD4C3D0007ED3D6 /* Keywords.swift in Sources */,
+				23E9661C1BD4C3D0007ED3D6 /* LoopingCharacters.swift in Sources */,
+				23E9661D1BD4C3D0007ED3D6 /* Named.swift in Sources */,
+				23E9661E1BD4C3D0007ED3D6 /* Repeat.swift in Sources */,
+				23E9661F1BD4C3D0007ED3D6 /* OKScriptParser.swift in Sources */,
+				23E966201BD4C3D1007ED3D6 /* Parser.swift in Sources */,
+				23E966211BD4C3D1007ED3D6 /* RPNParser.swift in Sources */,
+				23E966221BD4C3D1007ED3D6 /* SYExpressionParser.swift in Sources */,
+				23E966231BD4C3D1007ED3D6 /* Operators.swift in Sources */,
+				23E966241BD4C3D1007ED3D6 /* Token.swift in Sources */,
+				23E966251BD4C3D1007ED3D6 /* TokenizationState.swift in Sources */,
+				23E966261BD4C3D1007ED3D6 /* TokenizeOperation.swift in Sources */,
+				23E966271BD4C3D1007ED3D6 /* Tokenizer.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		23E966041BD4C396007ED3D6 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				23E966291BD4C3E7007ED3D6 /* cloneTests.swift in Sources */,
+				23E9662A1BD4C3E7007ED3D6 /* parserTests.swift in Sources */,
+				23E9662B1BD4C3E7007ED3D6 /* standardTokensTest.swift in Sources */,
+				23E9662C1BD4C3E7007ED3D6 /* stateTestBranch.swift in Sources */,
+				23E9662D1BD4C3E7007ED3D6 /* stateTestChar.swift in Sources */,
+				23E9662E1BD4C3E7007ED3D6 /* stateTestDelimeter.swift in Sources */,
+				23E9662F1BD4C3E7007ED3D6 /* stateTestKeywords.swift in Sources */,
+				23E966301BD4C3E7007ED3D6 /* stateTestLoop.swift in Sources */,
+				23E966311BD4C3E7007ED3D6 /* stateTestRepeat.swift in Sources */,
+				23E966321BD4C3E7007ED3D6 /* TestingSupportFunctions.swift in Sources */,
+				23E966331BD4C3E7007ED3D6 /* tokenizerTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		23E965AE1BD4C2CF007ED3D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23E965A01BD4C2CF007ED3D6 /* OysterKit iOS */;
+			targetProxy = 23E965AD1BD4C2CF007ED3D6 /* PBXContainerItemProxy */;
+		};
+		23E9660B1BD4C396007ED3D6 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 23E965FE1BD4C396007ED3D6 /* OysterKit Mac */;
+			targetProxy = 23E9660A1BD4C396007ED3D6 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		23E965B31BD4C2CF007ED3D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
+				PRODUCT_NAME = OysterKit;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		23E965B41BD4C2CF007ED3D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
+				PRODUCT_NAME = OysterKit;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				SWIFT_VERSION = 3.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		23E965B61BD4C2CF007ED3D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OysterKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		23E965B71BD4C2CF007ED3D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				INFOPLIST_FILE = OysterKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKit";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		23E965B91BD4C2CF007ED3D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = OysterKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		23E965BA1BD4C2CF007ED3D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_MODULES = YES;
+				INFOPLIST_FILE = OysterKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+		23E966111BD4C396007ED3D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = OysterKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		23E966121BD4C396007ED3D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_VERSION = A;
+				INFOPLIST_FILE = OysterKit/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+		23E966141BD4C396007ED3D6 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = OysterKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		23E966151BD4C396007ED3D6 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				COMBINE_HIDPI_IMAGES = YES;
+				INFOPLIST_FILE = OysterKitTests/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.rwe-uk.OysterKitTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		23E9659B1BD4C2CF007ED3D6 /* Build configuration list for PBXProject "OysterKit" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23E965B31BD4C2CF007ED3D6 /* Debug */,
+				23E965B41BD4C2CF007ED3D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23E965B51BD4C2CF007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23E965B61BD4C2CF007ED3D6 /* Debug */,
+				23E965B71BD4C2CF007ED3D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23E965B81BD4C2CF007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit iOSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23E965B91BD4C2CF007ED3D6 /* Debug */,
+				23E965BA1BD4C2CF007ED3D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23E966101BD4C396007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23E966111BD4C396007ED3D6 /* Debug */,
+				23E966121BD4C396007ED3D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		23E966131BD4C396007ED3D6 /* Build configuration list for PBXNativeTarget "OysterKit MacTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				23E966141BD4C396007ED3D6 /* Debug */,
+				23E966151BD4C396007ED3D6 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 23E965981BD4C2CF007ED3D6 /* Project object */;
+}

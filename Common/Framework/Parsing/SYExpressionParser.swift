@@ -27,15 +27,15 @@ OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import Foundation
 
-public class SYExpressionParser : StackParser{
+open class SYExpressionParser : StackParser{
     var rpnParser = RPNParser()
     
-    func processOperator(operatorToken:OperatorToken)->Bool{
+    func processOperator(_ operatorToken:OperatorToken)->Bool{
         
         while topToken() is OperatorToken{
             let topOp = topToken() as! OperatorToken
             if operatorToken.presidence() <= topOp.presidence(){
-                rpnParser.parse(popToken()!)
+                _ = rpnParser.parse(popToken()!)
             } else {
                 break
             }
@@ -49,24 +49,24 @@ public class SYExpressionParser : StackParser{
     func processCloseBracket()->Bool{
         var topTokenName = topToken()?.name
         while topTokenName != nil && topTokenName != "bracket-open" {
-            rpnParser.parse(popToken()!)
+            _ = rpnParser.parse(popToken()!)
             topTokenName = topToken()?.name
         }
         
         if topTokenName == nil {
-            println("Missing open bracket")
+            print("Missing open bracket")
             return true
         }
         
         return true
     }
     
-    override public func parse(token: Token) -> Bool {
+    override open func parse(_ token: Token) -> Bool {
         switch token.name{
         case "operator":
             return processOperator(token as! OperatorToken)
         case "integer","float":
-            rpnParser.parse(token)
+            _ = rpnParser.parse(token)
             return true
         case "bracket-open":
             pushToken(token)
@@ -75,7 +75,7 @@ public class SYExpressionParser : StackParser{
             return processCloseBracket()
         case "end":
             while (topToken() != nil){
-                rpnParser.parse(popToken()!)
+                _ = rpnParser.parse(popToken()!)
             }
             return true
         default:
@@ -87,7 +87,7 @@ public class SYExpressionParser : StackParser{
         rpnParser.execute()
     }
     
-    override public func parseString(string: String, withTokenizer: Tokenizer) {
+    override open func parseString(_ string: String, withTokenizer: Tokenizer) {
         rpnParser = RPNParser()
         super.parseString(string, withTokenizer: withTokenizer)
     }

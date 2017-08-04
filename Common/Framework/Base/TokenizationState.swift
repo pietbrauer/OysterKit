@@ -33,7 +33,7 @@ internal var __anonymousStateCount:Int = 0
 //
 // XCode 6 Beta 3 Crashes if two protocols refer to each other, so turning this into a class for now
 //
-public class TokenizationState : Printable, Equatable /*StringLiteralConvertible*/ {
+open class TokenizationState : CustomStringConvertible, Equatable /*StringLiteralConvertible*/ {
     var tokenGenerator : TokenCreationBlock?
     var id : String = ""
     var reference : String?
@@ -45,13 +45,14 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
     }
     
     init(){
-        id = "\(stateClassName())\(__anonymousStateCount++)"
+        __anonymousStateCount += 1
+        id = "\(stateClassName())\(__anonymousStateCount)"
     }
     
     //
     // String Literal
     //
-    public class func convertFromStringLiteral(value: String) -> TokenizationState {
+    open class func convertFromStringLiteral(_ value: String) -> TokenizationState {
         if let parsedState = OKStandard.parseState(value) {
             return parsedState
         }
@@ -59,14 +60,14 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         return TokenizationState()
     }
     
-    public class func convertFromExtendedGraphemeClusterLiteral(value: String) -> TokenizationState {
+    open class func convertFromExtendedGraphemeClusterLiteral(_ value: String) -> TokenizationState {
         return TokenizationState.convertFromStringLiteral(value)
     }
     
     //If I have a branch that goes to a branch that goes nowhere....
     func flattenBranches(){
         if branches.count == 1 {
-            if let branch = branches[0] as? Branch {
+            if let _ = branches[0] as? Branch {
                 branches = branches[0].branches
                 //Keep trying
                 flattenBranches()
@@ -74,7 +75,7 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         }
         
         for branch in branches {
-            branch.flatten()
+            _ = branch.flatten()
         }
     }
     
@@ -86,7 +87,7 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
     //
     // Manage storage of branches
     //
-    public func branch(toStates: [TokenizationState]) -> TokenizationState {
+    open func branch(_ toStates: [TokenizationState]) -> TokenizationState {
         for state in toStates{
             branches.append(state)
         }
@@ -94,7 +95,7 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         return self
     }
 
-    public func branch(toStates: TokenizationState...) -> TokenizationState {
+    open func branch(_ toStates: TokenizationState...) -> TokenizationState {
         return branch(toStates)
     }
 
@@ -103,16 +104,16 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
     //
     // As this method only calls branch, we can provide a concrete implementation here
     //
-    public func sequence(ofStates: TokenizationState...) -> TokenizationState {
+    open func sequence(_ ofStates: TokenizationState...) -> TokenizationState {
         sequence(ofStates)
         
         return self        
     }
     
-    public func sequence(ofStates:[TokenizationState]){
-        branch(ofStates[0])
+    open func sequence(_ ofStates:[TokenizationState]){
+        _ = branch(ofStates[0])
         for index in 1..<ofStates.count{
-            ofStates[index-1].branch(ofStates[index])
+            _ = ofStates[index-1].branch(ofStates[index])
         }
     }
 
@@ -123,9 +124,9 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
     //
     // Token creation
     //
-    public func token(emitToken: String) -> TokenizationState {
-        token(){(state:TokenizationState, capturedCharacters:String, startIndex:Int)->Token in
-            var token = Token(name: emitToken, withCharacters: capturedCharacters)
+    open func token(_ emitToken: String) -> TokenizationState {
+        _ = token(){(state:TokenizationState, capturedCharacters:String, startIndex:Int)->Token in
+            let token = Token(name: emitToken, withCharacters: capturedCharacters)
             token.originalStringIndex = startIndex
             return token
         }
@@ -133,9 +134,9 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         return self
     }
     
-    public func token(emitToken: Token) -> TokenizationState {
-        token(){(state:TokenizationState, capturedCharacters:String, startIndex:Int)->Token in
-            var token = Token(name: emitToken.name, withCharacters: capturedCharacters)
+    open func token(_ emitToken: Token) -> TokenizationState {
+        _ = token(){(state:TokenizationState, capturedCharacters:String, startIndex:Int)->Token in
+            let token = Token(name: emitToken.name, withCharacters: capturedCharacters)
             token.originalStringIndex = startIndex
             return token
         }
@@ -143,13 +144,13 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         return self
     }
     
-    public func token(with: TokenCreationBlock) -> TokenizationState {
+    open func token(_ with: @escaping TokenCreationBlock) -> TokenizationState {
         tokenGenerator = with
         
         return self
     }
     
-    public func clearToken()-> TokenizationState{
+    open func clearToken()-> TokenizationState{
         tokenGenerator = nil
         return self
     }
@@ -158,13 +159,13 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
     // Output
     //
     func pseudoTokenNameSuffix()->String{
-        if let token = tokenGenerator?(state: self,capturedCharacteres: "",charactersStartIndex:0){
+        if let token = tokenGenerator?(self,"",0){
             return "->"+token.name
         }
         return ""
     }
     
-    func serializeStateArray(indentation:String, states:Array<TokenizationState>)->String{
+    func serializeStateArray(_ indentation:String, states:Array<TokenizationState>)->String{
         if states.count == 1 {
             return states[0].serialize(indentation)
         }
@@ -183,7 +184,7 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         return output
     }
     
-    func serializeBranches(indentation:String)->String{
+    func serializeBranches(_ indentation:String)->String{
         if branches.count == 1  {
             return "."+branches[0].serialize(indentation)
         } else if (tokenGenerator != nil) {
@@ -207,46 +208,44 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
         return output+"}\n"
     }
     
-    func serialize(indentation:String)->String{
+    func serialize(_ indentation:String)->String{
         if (reference != nil) {
            return reference!+pseudoTokenNameSuffix()
         }
         return ""
     }
 
-    public var description:String{
+    open var description:String{
         return serialize("")
     }
     
     //
     // Object Life Cycle
     //
-    internal func __copyProperities(from:TokenizationState){
+    internal func __copyProperities(_ from:TokenizationState){
         if (from.tokenGenerator != nil){
-            token(from.tokenGenerator!)
+            _ = token(from.tokenGenerator!)
         }
 
         for branch in from.branches {
-            self.branch(branch.clone())
+            _ = self.branch(branch.clone())
         }
         
         reference = from.reference
     }
     
-    public func clone()->TokenizationState {
-        var newState = TokenizationState()
+    open func clone()->TokenizationState {
+        let newState = TokenizationState()
         newState.__copyProperities(self)
         return newState
     }
     
-    final func isEqualTo(otherState:TokenizationState)->Bool{
+    final func isEqualTo(_ otherState:TokenizationState)->Bool{
         return id == otherState.id
     }
     
-    func scanBranches(operation:TokenizeOperation){
+    func scanBranches(_ operation:TokenizeOperation){
         let startPosition = operation.context.currentPosition
-        
-        operation.debug(operation: "Entered TokenizationState at \(startPosition) with \(branches.count) states")
         
         for branch in branches {
             branch.scan(operation)
@@ -255,14 +254,13 @@ public class TokenizationState : Printable, Equatable /*StringLiteralConvertible
             //states are at the end that could be OK
             //Did we move forward? If so we can leave
             if operation.context.currentPosition > startPosition{
-                scanDebug("Found valid branch now at \(operation.context.currentPosition)")
                 return
             }
         }
         
     }
     
-    public func scan(operation : TokenizeOperation){
+    open func scan(_ operation : TokenizeOperation){
         scanBranches(operation)
     }
     
@@ -286,7 +284,7 @@ public func ==(lhs:[TokenizationState], rhs:[TokenizationState])->Bool{
     return true
 }
 
-public typealias   TokenCreationBlock = ((state:TokenizationState,capturedCharacteres:String,charactersStartIndex:Int)->Token)
+public typealias   TokenCreationBlock = ((_ state:TokenizationState,_ capturedCharacteres:String,_ charactersStartIndex:Int)->Token)
 
 /*
 
@@ -295,16 +293,16 @@ public typealias   TokenCreationBlock = ((state:TokenizationState,capturedCharac
 */
 extension TokenizationState : EmancipatedTokenizer {
     
-    func createToken(operation:TokenizeOperation,useCharacters:String?)->Token?{
-        var useCharacters = (useCharacters != nil) ? useCharacters : operation.context.consumedCharacters
-        if let token = tokenGenerator?(state:self, capturedCharacteres:useCharacters!,charactersStartIndex:operation.context.startPosition){
+    func createToken(_ operation:TokenizeOperation,useCharacters:String?)->Token?{
+        let useCharacters = (useCharacters != nil) ? useCharacters : operation.context.consumedCharacters
+        if let token = tokenGenerator?(self, useCharacters!,operation.context.startPosition){
             return token
         }
         
         return nil
     }
     
-    func emitToken(operation:TokenizeOperation,useCharacters:String?=nil){
+    func emitToken(_ operation:TokenizeOperation,useCharacters:String?=nil){
         if let token = createToken(operation,useCharacters: useCharacters) {
             operation.token(token)
         }
